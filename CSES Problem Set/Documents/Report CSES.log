@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.10)  6 JUL 2025 21:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.10)  6 JUL 2025 22:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,8 +715,8 @@ LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 2
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) [1
 
-{C:/Users/Hieu/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] (Report C
-SES.aux)
+{C:/Users/Hieu/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4] [
+5] (Report CSES.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -740,10 +740,11 @@ rm1000.pk> <C:\Users\Hieu\AppData\Local\MiKTeX\fonts/pk/ljfour/vntex/vnr/dpi600
 0\vnbx12.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program 
 Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "Report CSES.pdf" (2 pages, 121302 bytes).
+fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmsy7.pfb>
+Output written on "Report CSES.pdf" (5 pages, 167083 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
+ 374 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

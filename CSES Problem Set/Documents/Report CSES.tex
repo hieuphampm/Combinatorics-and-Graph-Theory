@@ -94,5 +94,111 @@
 	\mathcal{O}(N \cdot M)
 	\]
 
+	\section{Labyrinth}
+	\subsection*{Bài toán}
+	Cho mê cung dạng lưới kích thước \( N \times M \). Mỗi ô có thể là:
+	\begin{itemize}
+		\item Tường (\#): không đi được
+		\item Đường đi (.)
+		\item Điểm bắt đầu: \( A \)
+		\item Điểm kết thúc: \( B \)
+	\end{itemize}
+	
+	\textbf{Yêu cầu:} Tìm đường đi ngắn nhất từ \( A \) đến \( B \), hoặc trả lời rằng không thể.
+	
+	\subsection*{Mô hình hoá bài toán}
+	Mỗi ô trong lưới là một đỉnh trong đồ thị. Các đỉnh kề nhau nếu chúng là ô trống và liền kề theo 4 hướng:
+	\[
+	\text{Hướng dịch chuyển:}
+	\begin{cases}
+		\text{Xuống (D)}: (x+1, y) \\
+		\text{Lên (U)}: (x-1, y) \\
+		\text{Phải (R)}: (x, y+1) \\
+		\text{Trái (L)}: (x, y-1)
+	\end{cases}
+	\]
+	
+	\subsection*{Giải thuật BFS}
+	\begin{enumerate}
+		\item Khởi tạo hàng đợi \( Q \), đánh dấu ô bắt đầu \( A \) là đã thăm.
+		\item Trong khi \( Q \) chưa rỗng:
+		\begin{enumerate}
+			\item Lấy phần tử đầu hàng đợi: \( (x, y) \)
+			\item Duyệt 4 hướng để tìm ô kề chưa thăm và không phải tường
+			\item Đánh dấu đã thăm, lưu hướng đi, cập nhật khoảng cách:
+			\[
+			\text{dist}[x'][y'] = \text{dist}[x][y] + 1
+			\]
+			\item Thêm ô \( (x', y') \) vào hàng đợi
+		\end{enumerate}
+		\item Khi kết thúc, nếu ô \( B \) chưa được thăm, trả lời \texttt{NO}
+		\item Ngược lại, in ra đường đi bằng cách lần ngược từ \( B \) về \( A \) theo mảng hướng đi \texttt{par}
+	\end{enumerate}
+	
+	\subsection*{Độ phức tạp}
+	\begin{itemize}
+		\item Thời gian: \( O(N \times M) \), vì mỗi ô được duyệt tối đa 1 lần
+		\item Không gian: \( O(N \times M) \) cho các mảng: \texttt{vis}, \texttt{dist}, \texttt{par}
+	\end{itemize}
+	
+	\section{MessageRoute}
+	\subsection*{Đề bài}
+	Cho một đồ thị vô hướng gồm \( N \) đỉnh và \( M \) cạnh, đánh số từ 1 đến \( N \). Hãy tìm đường đi ngắn nhất từ đỉnh 1 đến đỉnh \( N \). Nếu không tồn tại, in ra \texttt{IMPOSSIBLE}.
+	
+	\textbf{Input:}
+	\begin{itemize}
+		\item Dòng đầu tiên chứa hai số nguyên \( N, M \)
+		\item \( M \) dòng tiếp theo, mỗi dòng chứa hai số nguyên \( a, b \) biểu diễn cạnh nối giữa đỉnh \( a \) và đỉnh \( b \)
+	\end{itemize}
+	
+	\textbf{Output:}
+	\begin{itemize}
+		\item Nếu không tồn tại đường đi từ 1 đến \( N \), in \texttt{IMPOSSIBLE}
+		\item Ngược lại, in số bước và các đỉnh trên đường đi ngắn nhất
+	\end{itemize}
+	
+	\subsection*{Ý tưởng và giải thuật}
+	Sử dụng thuật toán \textbf{BFS (Tìm kiếm theo chiều rộng)} để tìm đường đi ngắn nhất từ đỉnh 1 đến đỉnh \( N \).
+	
+	\subsubsection{Mô hình hóa đồ thị}
+	Đồ thị được biểu diễn dưới dạng danh sách kề:
+	\[
+	G[u] = \text{danh sách các đỉnh kề với } u
+	\]
+	
+	\subsubsection{Biến và cấu trúc dữ liệu sử dụng}
+	\begin{itemize}
+		\item \texttt{vis[u]}: đánh dấu đỉnh \( u \) đã được thăm
+		\item \texttt{dist[u]}: độ dài đường đi ngắn nhất từ đỉnh 1 đến \( u \)
+		\item \texttt{p[u]}: đỉnh trước đó trên đường đi đến \( u \)
+	\end{itemize}
+	
+	\subsubsection{Thuật toán BFS}
+	\begin{enumerate}
+		\item Khởi tạo hàng đợi \( Q \), đưa đỉnh 1 vào \( Q \), đánh dấu đã thăm
+		\item Trong khi \( Q \) chưa rỗng:
+		\begin{enumerate}
+			\item Lấy \( u = Q.\text{front()} \), xóa khỏi hàng đợi
+			\item Duyệt tất cả đỉnh \( v \) kề với \( u \)
+			\item Nếu \( v \) chưa thăm:
+			\begin{itemize}
+				\item Cập nhật \( \text{dist}[v] = \text{dist}[u] + 1 \)
+				\item Cập nhật \( p[v] = u \)
+				\item Đánh dấu đã thăm và đưa vào hàng đợi
+			\end{itemize}
+		\end{enumerate}
+		\item Sau khi BFS hoàn tất:
+		\begin{itemize}
+			\item Nếu \( N \) chưa được thăm \( \Rightarrow \) \texttt{IMPOSSIBLE}
+			\item Ngược lại, dùng mảng \texttt{p} để truy vết đường đi từ \( N \) về 1
+		\end{itemize}
+	\end{enumerate}
+	
+	\subsection{Độ phức tạp}
+	\begin{itemize}
+		\item Thời gian: \( \mathcal{O}(N + M) \)
+		\item Không gian: \( \mathcal{O}(N + M) \)
+	\end{itemize}
+
 	
 \end{document}
