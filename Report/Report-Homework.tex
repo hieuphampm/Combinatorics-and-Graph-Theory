@@ -253,6 +253,7 @@
 	\textbf{Kết luận:} Những chiếc cặp được đánh số \( n \leq 55 \) với \( n \equiv 1 \pmod{3} \) chắc chắn không chứa tiền.
 	
 	
+	\newpage
 	\section*{Week 02}
 	\subsection*{10.1.1}
 	Gọi \( n \) là số đỉnh của đồ thị và \( m = 9 \) là số cạnh.
@@ -861,6 +862,7 @@
 	a_1 \geq a_2 \geq \cdots \geq a_{t-1} \geq a_t + 1 \geq \cdots \geq a_p + 1
 	\]
 	
+	\newpage
 	\section*{Week 04}
 	\subsection*{BT 1}
 	\begin{enumerate}
@@ -1212,4 +1214,670 @@
 		\boxed{\binom{s + t - 1}{t - 1}}
 		\]
 	\end{enumerate}
-\end{document}
+	
+	\newpage
+	\section*{Week 05}
+	\subsection*{P 10.2.1:}
+	Let $x$ and $y$ be vertices of a general graph.
+	\begin{itemize}
+		\item[(a)] Suppose that there is a closed walk containing both $x$ and $y$. Must there be a closed trail containing both $x$ and $y$?
+		\item[(b)] Suppose that there is a closed trail containing both $x$ and $y$. Must there be a cycle containing both $x$ and $y$?
+	\end{itemize}
+	\begin{itemize}[leftmargin=1.5em]
+		\item[(a)] \textbf{Không nhất thiết.}
+		
+		\textit{Giải thích:} Một đường đi đóng có thể đi qua một số cạnh và đỉnh nhiều lần. Do đó, mặc dù có một đường đi đóng đi qua cả $x$ và $y$, không thể đảm bảo rằng tồn tại một đường đi đóng đơn (không lặp cạnh) nào cũng đi qua cả hai đỉnh này.
+		
+		\textit{Phản ví dụ:} Xét đồ thị gồm các đỉnh $x$, $y$, $z$ với các cạnh:
+		\[
+		x \leftrightarrow y,\quad y \leftrightarrow z,\quad z \leftrightarrow y,\quad y \leftrightarrow x
+		\]
+		Khi đó ta có đường đi đóng: $x \to y \to z \to y \to x$, đi qua cả $x$ và $y$, nhưng có cạnh $y \to z$ và $z \to y$ được đi qua hai lần. Không thể rút gọn đường đi này thành một đường đi đóng đơn đi qua cả $x$ và $y$ mà không lặp cạnh.
+		
+		\item[(b)] \textbf{Cũng không nhất thiết.}
+		
+		\textit{Giải thích:} Đường đi đóng đơn là đường đi khép kín không lặp cạnh, nhưng có thể lặp đỉnh. Trong khi đó, chu trình là một đường đi đóng không lặp cạnh và không lặp đỉnh (ngoại trừ điểm đầu và điểm cuối). Vì vậy, một đường đi đóng đơn có thể đi qua $x$ và $y$ ở những vị trí trùng lặp mà không nằm trên cùng một chu trình đơn.
+		
+		\textit{Phản ví dụ:} Xét đồ thị có đường đi:
+		\[
+		x \to a \to b \to y \to a \to x
+		\]
+		Đây là một đường đi đóng đơn vì không có cạnh nào bị lặp lại. Tuy nhiên, đỉnh $a$ xuất hiện hai lần. Do đó, không tồn tại chu trình nào (không lặp đỉnh) chứa cả $x$ và $y$ trong trường hợp này.
+		
+	\end{itemize}
+	
+	\subsection*{10.2.2}
+	\textbf{If a vertex x of a graph is on a circuit, then is x also on a cycle?}
+	
+	Trong lý thuyết đồ thị, một \textbf{mạch (circuit)} là một đường đi đóng đơn — tức là bắt đầu và kết thúc tại cùng một đỉnh, không có cạnh nào bị lặp lại, nhưng có thể lặp lại đỉnh. Một \textbf{chu trình (cycle)} là một mạch mà không có đỉnh nào (ngoại trừ điểm đầu/cuối) bị lặp lại.
+	
+	Mỗi khi một đỉnh $x$ nằm trên một mạch, thì ta có thể tìm trong mạch đó một đoạn con không lặp đỉnh bắt đầu và kết thúc tại $x$ — chính là một chu trình. Cụ thể hơn, nếu trong mạch có một đỉnh bị lặp lại (gọi là $x$), thì đoạn giữa hai lần xuất hiện của $x$ tạo thành một chu trình.
+	
+	\textit{Ví dụ minh họa:} Xét mạch:
+	\[
+	x \to a \to b \to c \to x \to d \to e \to x
+	\]
+	Trong mạch này, đỉnh $x$ xuất hiện nhiều lần. Tuy nhiên, đoạn con:
+	\[
+	x \to d \to e \to x
+	\]
+	là một chu trình chứa $x$. Do đó, từ mạch ban đầu có thể trích ra chu trình chứa $x$.
+	
+	\vspace{0.5em}
+	$\rightarrow$ Nếu một đỉnh $x$ nằm trên một mạch thì luôn tồn tại một chu trình cũng chứa đỉnh $x$.
+	
+	\subsection*{10.2.3}
+	\textbf{Cơ sở quy nạp:} Nếu đường đi từ $x$ đến $y$ chỉ có 1 cạnh, tức là $x$ và $y$ kề nhau, thì bản thân đường đi này là một đường đơn.
+	
+	\textbf{Giả thiết quy nạp:} Giả sử mọi đường đi có \textbf{k cạnh} (với $k \geq 1$) nối $x$ và $y$ đều có thể rút gọn thành một đường đơn nối $x$ và $y$.
+	
+	\textbf{Bước quy nạp:} Xét một đường đi $W$ có $k+1$ cạnh nối $x$ đến $y$. Nếu $W$ không có đỉnh nào lặp lại thì $W$ đã là một đường đơn.
+	
+	Ngược lại, nếu $W$ có đỉnh lặp lại, giả sử $v$ là đỉnh xuất hiện ít nhất hai lần trong $W$, và ta xét hai vị trí xuất hiện đầu tiên và tiếp theo của $v$.
+	
+	Gọi $W_1$ là đoạn con của $W$ từ lần đầu đến lần tiếp theo $v$. Vì đây là một đường đi đóng (walk) bắt đầu và kết thúc tại cùng một đỉnh $v$, ta có thể loại bỏ đoạn $W_1$ để tạo ra một đường đi $W'$ ngắn hơn nối $x$ đến $y$ với ít hơn $k+1$ cạnh.
+	
+	Theo giả thiết quy nạp, $W'$ có thể rút gọn thành một đường đơn nối $x$ đến $y$.
+	
+	$\rightarrow$ Mọi đường đi nối hai đỉnh $x$ và $y$ trong đồ thị đều có thể rút gọn thành một đường đơn. Do đó, nếu tồn tại đường đi từ $x$ đến $y$, thì cũng tồn tại đường đơn từ $x$ đến $y$.
+	
+	\subsection*{10.2.4}
+	Đồ thị $G$ có $|V| = 10$ đỉnh và $|E| = 19$ cạnh. Ta cần tìm một chu trình dài nhất có thể, nghĩa là đi qua càng nhiều đỉnh khác nhau càng tốt (tối đa là 10, tức là một chu trình Hamilton nếu tồn tại).
+	
+	Quan sát đồ thị, ta nhận thấy:
+	\begin{itemize}
+		\item Đỉnh 9 có bậc $\deg(9) = 3$, nối với các đỉnh: 5, 6, 8.
+		\item Nếu ta loại bỏ đỉnh 9 khỏi đồ thị, phần còn lại là một đồ thị dày đặc (nhiều chu trình lớn).
+	\end{itemize}
+	
+	Ta cố gắng xây dựng một chu trình đi qua nhiều đỉnh nhất. Sau đây là một chu trình gồm \textbf{9 đỉnh}:
+	
+	\[
+	1 \to 2 \to 3 \to 8 \to 9 \to 6 \to 7 \to 10 \to 5 \to 1
+	\]
+	
+	Chu trình này đi qua các đỉnh: 1, 2, 3, 8, 9, 6, 7, 10, 5 (tổng cộng 9 đỉnh, 9 cạnh). Không thể mở rộng chu trình này để đi qua tất cả 10 đỉnh vì:
+	- Đỉnh còn lại là 4, nhưng không có cách thêm đỉnh 4 vào chu trình trên mà vẫn giữ chu trình đơn.
+	
+	Do đó, \textbf{độ dài lớn nhất của một chu trình trong đồ thị là 9}.
+
+	\subsection*{10.2.5}
+	Đồ thị Petersen là một đồ thị vô hướng có:
+	\begin{itemize}
+		\item $|V| = 10$ đỉnh
+		\item $|E| = 15$ cạnh
+		\item Là một đồ thị \textbf{3-regular} (mỗi đỉnh có bậc 3)
+	\end{itemize}
+	
+	Ta xét các độ dài chu trình xuất hiện trong đồ thị Petersen bằng cách quan sát hoặc liệt kê:
+	
+	\begin{itemize}
+		\item Chu trình độ dài 5: ví dụ như chu trình ngoại tiếp gồm các đỉnh: $1 \to 2 \to 3 \to 4 \to 5 \to 1$.
+		\item Chu trình độ dài 6: ví dụ $1 \to 6 \to 9 \to 4 \to 5 \to 10 \to 1$.
+		\item Chu trình độ dài 8: có thể tìm thấy bằng cách nối các chu trình con.
+		\item Chu trình độ dài 9: như $1 \to 2 \to 3 \to 8 \to 9 \to 4 \to 5 \to 10 \to 6 \to 1$
+	\end{itemize}
+	
+	\textbf{Tuy nhiên:} Không tồn tại chu trình độ dài 3 hoặc 4 trong đồ thị Petersen (vì đồ thị này không chứa tam giác hay tứ giác).
+	
+	\vspace{1em}
+	\textbf{Giả thuyết:} Độ dài chu trình nhỏ nhất trong đồ thị Petersen là 5 (chu trình ngắn nhất), và tập hợp độ dài chu trình có thể có là:
+	\[
+	\boxed{\{5, 6, 8, 9, 10\}}
+	\]
+	Tức là, đồ thị Petersen chứa các chu trình độ dài 5 trở lên, nhưng không chứa chu trình độ dài 3 hoặc 4.
+	
+	\subsection*{10.2.6}
+	\textbf{(1) Đồ thị liên thông không có \textit{mạch}:} \\
+	Có thể dùng vì trong một đồ thị đơn:
+	\begin{itemize}
+		\item Một \textbf{chu trình} là một mạch mà không có đỉnh lặp lại (ngoại trừ điểm đầu và cuối).
+		\item Nếu không có mạch nào, thì chắc chắn không thể có chu trình.
+		\item Ngược lại, nếu không có chu trình, thì cũng không thể có mạch.
+	\end{itemize}
+	Do đó, ta có thể định nghĩa \textbf{cây} là một đồ thị liên thông không chứa mạch.
+	
+	\textbf{(2) Đồ thị liên thông không có \textit{đường đi đóng}:} \\
+	Không thể dùng vì:
+	\begin{itemize}
+		\item Một \textbf{đường đi đóng} (closed walk) là một dãy các đỉnh bắt đầu và kết thúc tại cùng một đỉnh, có thể lặp lại cạnh và đỉnh.
+		\item Nếu một đồ thị không có đường đi đóng nào, thì nó chỉ có thể là một đường thẳng duy nhất (hoặc một tập hợp các cây nhỏ rời rạc).
+		\item Tuy nhiên, một cây có thể chứa nhiều đường đi đóng không phải là chu trình, do việc đi "lùi lại" trên cùng một cạnh (theo hai hướng ngược nhau).
+		\item Ví dụ: trong một cây, có thể đi $v_1 \to v_2 \to v_1$ — đây là một đường đi đóng (lặp đỉnh và cạnh) nhưng không phải chu trình.
+	\end{itemize}
+	Vì vậy, yêu cầu "không có đường đi đóng" là quá mạnh và loại trừ cả những cây hợp lệ.
+	
+	\vspace{1em}
+	\noindent \textbf{Như vậy:}
+	\begin{itemize}
+		\item Có thể định nghĩa cây là một đồ thị liên thông không chứa mạch.
+		\item Không thể định nghĩa cây là một đồ thị liên thông không có đường đi đóng.
+	\end{itemize}
+	
+	\subsection*{10.2.7}
+	\begin{itemize}
+		\item \textbf{Có thể là một cây?} \\
+		Có vi trong lý thuyết đồ thị, một cây là một đồ thị liên thông và không chứa chu trình. Một định lý cơ bản cho biết:
+		\[
+		\text{Một cây với } n \text{ đỉnh thì có } n - 1 \text{ cạnh}.
+		\]
+		Với $n = 5$, ta có $5 - 1 = 4$ cạnh. Do đó, nếu đồ thị liên thông và không chứa chu trình, thì nó có thể là một cây.
+		
+		\item \textbf{Phải là một cây?} \\
+		Không vì mặc dù một cây với 5 đỉnh có đúng 4 cạnh, nhưng không phải mọi đồ thị đơn với 5 đỉnh và 4 cạnh đều là cây. Có thể tồn tại đồ thị không liên thông hoặc có chu trình nhưng vẫn có 4 cạnh.
+		
+		\textit{Ví dụ:} Một đồ thị gồm hai thành phần liên thông:
+		\begin{itemize}
+			\item Một thành phần là một chu trình gồm 3 đỉnh và 3 cạnh.
+			\item Một thành phần là một cạnh nối hai đỉnh còn lại.
+		\end{itemize}
+		Khi đó tổng cộng có 5 đỉnh và 4 cạnh, nhưng không phải là một cây vì đồ thị không liên thông và có chu trình.
+		
+	\end{itemize}
+	
+	\vspace{1em}
+	\noindent \textbf{Vậy:}
+	\begin{itemize}
+		\item Đồ thị có thể là một cây nếu nó liên thông và không chứa chu trình.
+		\item Tuy nhiên, nó không bắt buộc phải là một cây.
+	\end{itemize}
+	
+	\subsection*{10.2.8}
+	Một cây là một đồ thị liên thông không có chu trình. Trong đồ thị này, mỗi cây có $v$ đỉnh thì có đúng $v - 1$ cạnh.
+	
+	Vì $G$ là một \textit{rừng} gồm $t$ cây rời nhau, giả sử các cây đó có $n_1, n_2, \dots, n_t$ đỉnh, thì:
+	\[
+	n_1 + n_2 + \dots + n_t = n
+	\]
+	
+	Số cạnh trong mỗi cây là $n_i - 1$, do đó tổng số cạnh trong toàn bộ rừng là:
+	\[
+	(n_1 - 1) + (n_2 - 1) + \dots + (n_t - 1) = (n_1 + n_2 + \dots + n_t) - t = n - t
+	\]
+	
+	\vspace{1em}
+	\noindent \textbf{Như vậy:} Số cạnh của rừng $G$ là:
+	\[
+	\boxed{n - t}
+	\]
+	
+	\subsection*{10.2.9}
+	Gọi $G = (V, E)$ là một cây hữu hạn với $|V| = n \geq 2$ đỉnh.
+	
+	Ta biết rằng:
+	\begin{itemize}
+		\item Một cây liên thông và không có chu trình.
+		\item Một cây với $n$ đỉnh thì có đúng $n - 1$ cạnh.
+	\end{itemize}
+	
+	\textbf{Ý tưởng chứng minh:} Ta sẽ chứng minh bằng cách chọn một đường đi dài nhất trong cây.
+	
+	\vspace{0.5em}
+	\noindent \textbf{Bước 1:} Trong mọi cây, luôn tồn tại một đường đi dài nhất (vì số đỉnh là hữu hạn).  
+	
+	Gọi đường đi dài nhất này là:
+	\[
+	v_1 \to v_2 \to \dots \to v_k
+	\]
+	với $k \geq 2$.
+	
+	\noindent \textbf{Bước 2:} Ta sẽ chứng minh rằng $v_1$ và $v_k$ là các đỉnh lá.
+	
+	Giả sử ngược lại rằng $v_1$ không phải lá, tức là $\deg(v_1) \geq 2$. Khi đó tồn tại đỉnh $u$ nối với $v_1$ mà không nằm trên đường đi trên (vì nếu không, $v_1$ chỉ nối với $v_2$). Khi đó, ta có thể mở rộng đường đi thành:
+	\[
+	u \to v_1 \to v_2 \to \dots \to v_k
+	\]
+	mâu thuẫn với giả thiết rằng đường đi ban đầu là dài nhất.
+	
+	Tương tự, $v_k$ cũng phải là đỉnh lá.
+	
+	\noindent \textbf{Do đó:} Đã tồn tại ít nhất hai đỉnh lá $v_1$ và $v_k$ trong cây $G$. Do đó, mọi cây hữu hạn có ít nhất 2 đỉnh thì có ít nhất hai đỉnh lá.
+	
+	\[
+	\boxed{\text{Mọi cây hữu hạn với } n \geq 2 \text{ luôn có ít nhất hai lá.}}
+	\]
+	
+	\subsection*{10.2.10}
+	Ta sử dụng một định lý trong lý thuyết đồ thị:
+	
+	\textbf{Định lý:} Trong một cây với ít nhất hai đỉnh, ta có:
+	\[
+	\sum_{v \in V} \deg(v) = 2(n - 1)
+	\]
+	vì cây có $n$ đỉnh thì có $n - 1$ cạnh, và tổng bậc của tất cả các đỉnh bằng $2|E| = 2(n-1)$.
+	
+	Gọi số đỉnh trong cây là $n$, và gọi số lá là $L$ (đỉnh có bậc 1).  
+	Giả sử chỉ có một đỉnh $v$ có bậc 4. Để \textbf{tối thiểu hoá số lá}, ta muốn các đỉnh còn lại có bậc càng lớn hơn 1 càng tốt (tức là bậc 2 trở lên). Tuy nhiên, ta vẫn cần đảm bảo tổng bậc là $2(n - 1)$.
+	
+	Gọi:
+	- \( L \) là số lá (bậc 1),
+	- \( d_i \) là bậc của các đỉnh khác (gồm đỉnh bậc 4 và các đỉnh bậc $\geq$ 2).
+	
+	Khi đó:
+	\[
+	\sum \deg(v) = L \cdot 1 + 4 + \sum \text{(các đỉnh còn lại, bậc $\geq$ 2)} = 2(n - 1)
+	\]
+	
+	Giả sử chỉ có một đỉnh bậc 4, các đỉnh còn lại là các đỉnh bậc 1 (lá) và một số đỉnh bậc 2 để giữ cho cây không phân nhánh thêm. Cấu hình tối thiểu là như sau:
+	
+	- Đỉnh bậc 4 nối với 4 nhánh.
+	- Mỗi nhánh là một chuỗi các đỉnh bậc 2 nối đến một lá ở cuối.
+	
+	Để có số lá \textbf{ít nhất}, ta nên làm sao cho mỗi nhánh chỉ có một lá ở cuối, và các đỉnh bên trong có bậc 2. Như vậy, mỗi nhánh chỉ dẫn đến một lá.
+	
+	\textbf{Do đó, số lá ít nhất chính là số nhánh xuất phát từ đỉnh bậc 4, tức là 4.}
+	
+	$\rightarrow$
+	\[
+	\boxed{\text{Số lá ít nhất trong cây là } 4}
+	\]
+	
+	\subsection*{10.2.11}
+	Tổng bậc của tất cả các đỉnh là:
+	\[
+	3 + 3 + 3 + 2 + 1 = 12
+	\]
+	Mà tổng bậc trong một đồ thị đơn luôn bằng $2|E|$ (với $|E|$ là số cạnh), nên số cạnh trong đồ thị là:
+	\[
+	|E| = \frac{12}{2} = 6
+	\]
+	
+	Mặt khác, giả sử rằng $G$ \textit{không chứa chu trình}, tức là $G$ là một \textbf{rừng} (forest). Khi đó, mỗi thành phần liên thông của đồ thị là một cây.
+	
+	Một định lý trong lý thuyết đồ thị cho biết:
+	\[
+	\text{Một cây với } n \text{ đỉnh thì có đúng } n - 1 \text{ cạnh}
+	\]
+	Nếu $G$ là một rừng gồm $k$ cây với tổng cộng $n = 5$ đỉnh, thì tổng số cạnh tối đa là:
+	\[
+	5 - k \leq 5 - 1 = 4 \quad \text{(vì phải có ít nhất 1 thành phần)}
+	\]
+	
+	Vậy tổng số cạnh trong một rừng với 5 đỉnh là \textbf{tối đa 4}.  
+	Nhưng ở trên ta đã tính được $G$ có đến $6$ cạnh. Mâu thuẫn.
+	
+	\vspace{1em}
+	\noindent \textbf{Do đó:}  
+	
+	Vì $G$ có 6 cạnh nhưng một rừng với 5 đỉnh chỉ có nhiều nhất 4 cạnh, nên $G$ \textbf{không thể là rừng}.  
+	Do đó, $G$ \textbf{phải chứa ít nhất một chu trình}.
+	
+	\[
+	\boxed{G \text{ chứa một chu trình}}
+	\]
+	
+	\subsection*{10.2.12}
+	Ta cần chứng minh rằng nếu một cây $T$ có đúng hai đỉnh bậc 1 (tức là hai lá), thì $T$ phải là một đường đi (path graph).
+	
+	\textbf{Định nghĩa:}
+	\begin{itemize}
+		\item Một đường đi (path) là một dãy các đỉnh nối liên tiếp mà không lặp đỉnh.
+		\item Một cây có đúng hai lá thì mọi đỉnh còn lại phải có bậc đúng bằng 2 (nếu có).
+	\end{itemize}
+	
+	\noindent \textbf{Chứng minh:}
+	
+	Vì $T$ là một cây, nên nó là một đồ thị liên thông và không có chu trình.
+	
+	Giả sử hai lá của $T$ là $u$ và $v$.
+	
+	Trong cây, luôn tồn tại một và chỉ một đường đi đơn giữa hai đỉnh bất kỳ. Vì vậy, tồn tại một đường đi duy nhất từ $u$ đến $v$ trong $T$ — gọi là $P$.
+	
+	Nếu tồn tại bất kỳ đỉnh nào trong $T$ không nằm trên $P$, thì nó phải được nối với một đỉnh nào đó trên $P$ bằng một cạnh. Khi đó, ta có thể đi từ $u$ đến $v$ qua nhánh đó và quay lại $P$, hình thành một chu trình — mâu thuẫn với giả thiết $T$ là cây.
+	
+	Vì vậy, mọi đỉnh trong $T$ đều nằm trên đường đi từ $u$ đến $v$. Do đó, $T$ chính là đường đi đó.
+	
+	$\rightarrow$ Nếu một cây có đúng hai lá, thì nó phải là một đường đi.
+	
+	\[
+	\boxed{\text{Nếu } T \text{ là cây và có đúng hai lá, thì } T \text{ là một đường đi}}
+	\]
+	
+	\subsection*{10.2.13}
+	Vì $G$ là một \textbf{cây} với 20 đỉnh, nên số cạnh của $G$ là:
+	\[
+	|E(G)| = 20 - 1 = 19
+	\]
+	và $G$ không chứa chu trình nào.
+	
+	Giờ ta xét đồ thị $H$ được tạo từ $G$ bằng cách thêm cạnh $\{v_4, v_{18}\}$. Ta phân tích:
+	
+	\begin{itemize}
+		\item Trong cây $G$, tồn tại duy nhất một đường đi giữa bất kỳ hai đỉnh. Vì vậy, tồn tại một đường đi duy nhất từ $v_4$ đến $v_{18}$ trong $G$.
+		\item Khi thêm cạnh $\{v_4, v_{18}\}$ vào $H$, ta tạo thành một chu trình duy nhất: đó là đường đi từ $v_4$ đến $v_{18}$ trong $G$, cộng thêm cạnh $\{v_4, v_{18}\}$ để quay lại điểm xuất phát.
+	\end{itemize}
+	
+	Vì không có cạnh nào khác được thêm vào, nên chỉ có duy nhất một chu trình mới được tạo ra.
+	
+	\noindent \textbf{Như vậy:}
+	\[
+	\boxed{\text{Đồ thị } H \text{ có đúng } 1 \text{ chu trình.}}
+	\]
+	
+	\subsection*{10.2.14}
+	Một đồ thị liên thông với $n$ đỉnh và $m$ cạnh thì số chu trình độc lập (cơ sở) là:
+	\[
+	\beta = m - n + 1
+	\]
+	
+	Áp dụng với $n = 47$, $m = 47$:
+	\[
+	\beta = 47 - 47 + 1 = 1
+	\]
+	
+	Do đó, đồ thị $G$ chứa ít nhất một chu trình.  
+	Cụ thể hơn, \textbf{không gian chu trình của $G$ có bậc 1}, tức là tất cả các chu trình trong $G$ có thể được tạo ra từ đúng một chu trình cơ sở duy nhất.
+	
+	Tuy nhiên, \textbf{tổng số chu trình (kể cả lặp cạnh, tổ hợp) trong $G$ có thể lớn hơn 1}, phụ thuộc vào cấu trúc cụ thể của đồ thị.
+	
+	
+	$\rightarrow$ G có đúng một chu trình cơ sở, và ít nhất một chu trình, nhưng có thể có nhiều chu trình khác nhau.
+	
+	\subsection*{10.2.15}
+	\subsubsection*{Đồ thị đơn}
+	
+	Giả sử $G$ là một đồ thị đơn có $n$ đỉnh và $m \geq n$ cạnh.
+	
+	\begin{itemize}
+		\item Một định lý cơ bản trong lý thuyết đồ thị nói rằng: \\
+		Một \textbf{rừng} (tập các cây) có $n$ đỉnh và không chứa chu trình thì có nhiều nhất $n - k$ cạnh, trong đó $k$ là số thành phần liên thông.
+		
+		\item Như vậy, nếu một đồ thị không có chu trình nào (tức là rừng), thì số cạnh của nó \textbf{tối đa} là $n - k \leq n - 1$ (vì $k \geq 1$).
+		
+		\item Do đó, nếu $G$ có \textbf{nhiều hơn hoặc bằng $n$ cạnh}, thì chắc chắn tồn tại ít nhất một chu trình trong $G$.
+	\end{itemize}
+	
+	
+	$\rightarrow$ Mọi đồ thị đơn với  n $\geq$ 2 \text{ và } m $\geq$ n \text thì phải chứa ít nhất một chu trình.
+	
+	\subsubsection*{Đồ thị tổng quát (có thể có cạnh lặp hoặc khuyên)}
+	
+	Trong đồ thị tổng quát:
+	\begin{itemize}
+		\item Nếu có khuyên (loop) hoặc cạnh lặp thì ta có thể có chu trình ngay lập tức — vì một khuyên là một chu trình độ dài 1.
+		\item Thậm chí với 1 đỉnh và 1 khuyên, vẫn có chu trình → không cần đến $n \geq 2$.
+	\end{itemize}
+	
+	$\rightarrow$ Với đồ thị tổng quát, nếu có cạnh lặp hoặc khuyên thì có thể có chu trình ngay cả khi m < n.
+	
+	\subsection*{10.2.16}
+	\subsubsection*{(a) Nếu $G$ là một cây, thì các dãy bậc khả dĩ là gì?}
+	Với cây có $n$ đỉnh thì luôn có $n - 1$ cạnh.  
+	Vậy nếu $G$ là cây thì:
+	\[
+	|E| = 10 - 1 = 9 \Rightarrow \sum_{v \in V} \deg(v) = 2|E| = 18
+	\]
+	
+	Giả sử dãy bậc là:
+	\[
+	\deg(v_1) = 5, \quad \deg(v_2) = 4, \quad \deg(v_3) = \dots = ?
+	\]
+	
+	Tổng bậc cần là 18, đã có \(5 + 4 = 9\), còn lại \(18 - 9 = 9\) cho 8 đỉnh.  
+	Có nhiều khả năng như:
+	- 5, 4, 1, 1, 1, 2, 2, 1, 1, 0 → không hợp lệ vì không đủ 10 đỉnh có tổng bậc = 18.
+	- 5, 4, 1, 1, 1, 1, 1, 1, 1, 1 → tổng là \(5 + 4 + 8 \times 1 = 17\) → thiếu.
+	
+	Một dãy hợp lệ là:
+	\[
+	\boxed{5,\ 4,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 2}
+	\]
+	Tổng = \(5 + 4 + 2 + 7 \times 1 = 18\)
+	
+	\subsubsection*{(b) Liệu $G$ có thể là một rừng với 2 thành phần liên thông không? Nếu có, các khả năng cho $|E|$ và dãy bậc là gì?}
+	Với một rừng có $k$ thành phần liên thông và $n$ đỉnh, ta có:
+	\[
+	|E| = n - k = 10 - 2 = 8
+	\Rightarrow \sum \deg(v) = 2|E| = 16
+	\]
+	
+	Ta vẫn có một đỉnh bậc 5 và ít nhất một đỉnh bậc 4.
+	
+	Vậy:
+	\[
+	5 + 4 + x_1 + \dots + x_8 = 16
+	\Rightarrow x_1 + \dots + x_8 = 7
+	\]
+	
+	Một dãy khả dĩ:
+	\[
+	\boxed{5,\ 4,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 0}
+	\]
+	Tổng = \(5 + 4 + 7 \times 1 + 0 = 16\)
+	
+	\subsubsection*{(c) Nếu $G$ có 2 thành phần liên thông và $|E| = 9$, thì số chu trình trong $G$ có thể là bao nhiêu?}
+	Với 2 thành phần liên thông và $n = 10$, thì cây (rừng) có nhiều nhất:
+	\[
+	n - k = 10 - 2 = 8 \text{ cạnh} \Rightarrow \text{không có chu trình}
+	\]
+	
+	Nay $|E| = 9 > 8$ $\rightarrow$ có thêm 1 cạnh dư ra $\rightarrow$ tạo đúng 1 chu trình độc lập.
+	
+	\[
+	\boxed{\text{Số chu trình độc lập trong } G \text{ là } 1}
+	\]
+	Gọi $c$ là số chu trình độc lập:
+	\[
+	c = |E| - |V| + k = 9 - 10 + 2 = \boxed{1}
+	\]
+	
+	\subsection*{10.2.17}
+	Giả sử dãy $d_1, d_2, \dots, d_n$ là dãy bậc của một cây $T$ có $n$ đỉnh.  
+	Vì $T$ là một cây nên nó có đúng $n - 1$ cạnh.  
+	Mỗi cạnh đóng góp 2 vào tổng bậc, nên:
+	\[
+	\sum_{i=1}^{n} d_i = 2(n - 1) = 2n - 2
+	\]
+	Vậy điều kiện đúng.
+	
+	\vspace{1em}
+	Giả sử dãy $d_1 \geq d_2 \geq \dots \geq d_n$ là dãy các số nguyên dương sao cho:
+	\[
+	\sum_{i=1}^{n} d_i = 2n - 2
+	\]
+	
+	Ta cần chứng minh rằng tồn tại một cây có dãy bậc như vậy.
+	
+	\textit{Chứng minh bằng quy nạp theo số đỉnh $n$.}
+	
+	\textbf{Cơ sở:} \( n = 2 \): Dãy khả dĩ duy nhất là \( d_1 = d_2 = 1 \), và tổng là \( 2 \), đúng bằng \( 2n - 2 \). Đây là cây 2 đỉnh nối nhau.
+	
+	\textbf{Bước quy nạp:} Giả sử định lý đúng với mọi số nhỏ hơn $n$, xét dãy $d_1 \geq \cdots \geq d_n$ sao cho:
+	\[
+	\sum_{i=1}^{n} d_i = 2n - 2
+	\]
+	
+	Vì các $d_i$ là số nguyên dương, tồn tại ít nhất một đỉnh bậc 1 (lá). Giả sử \( d_n = 1 \).  
+	Gỡ bỏ đỉnh đó và giảm bậc của đỉnh mà nó nối vào (tức là đỉnh có bậc > 1), dãy mới có:
+	- $n - 1$ phần tử
+	- Tổng bậc là \( 2n - 2 - 2 = 2(n - 1) - 2 \)
+	
+	Theo giả thiết quy nạp, dãy mới là dãy bậc của cây $T'$ với $n - 1$ đỉnh.
+	
+	Gắn lại đỉnh bậc 1 vào đỉnh bị giảm bậc, ta được cây $T$ có dãy bậc ban đầu.
+	
+	\vspace{1em}
+	\noindent \textbf{Như vậy:}
+	\[
+	\boxed{\text{Dãy } d_1 \geq \cdots \geq d_n \text{ là dãy bậc của một cây khi và chỉ khi } \sum_{i=1}^n d_i = 2n - 2}
+	\]
+	
+	\subsection*{10.2.18}
+	Một \textbf{cây bao trùm (spanning tree)} là một cây con của đồ thị, liên thông và chứa tất cả các đỉnh.
+	
+	Giả sử $T$ là một cây với $n$ đỉnh. Khi đó:
+	\begin{itemize}
+		\item $T$ đã liên thông.
+		\item $T$ có đúng $n - 1$ cạnh.
+		\item Không có chu trình.
+	\end{itemize}
+	
+	Do đó, $T$ \textbf{đã là cây bao trùm} của chính nó.  
+	Vì $T$ không có cạnh dư, nên không tồn tại bất kỳ cây con nào khác nối tất cả các đỉnh mà vẫn giữ cấu trúc cây.
+	
+	$\rightarrow$ T có đúng 1 cây bao trùm, đó chính là bản thân nó.
+	
+	\subsection*{10.2.19}
+	Gọi $G$ là một đồ thị vô hướng đơn với $n$ đỉnh.  
+	Một cây bao trùm của $G$ là một cây con liên thông chứa tất cả $n$ đỉnh và không có chu trình.
+	
+	Một định lý cơ bản trong lý thuyết đồ thị cho biết:
+	
+	\[
+	\boxed{\text{Mỗi cây có đúng } n - 1 \text{ cạnh}}
+	\]
+	
+	Vì vậy, bất kỳ cây bao trùm nào của $G$ đều có đúng $n - 1$ cạnh.  
+	Do đó, nếu $T_1$ và $T_2$ đều là các cây bao trùm của $G$, thì:
+	
+	\[
+	|E(T_1)| = |E(T_2)| = n - 1
+	\]
+	
+	$\rightarrow$ Mọi cây bao trùm của cùng một đồ thị đều có cùng số cạnh là n - 1.
+	
+	\subsection*{10.2.20}
+	Ta chứng minh hai mệnh đề tương đương: $(a) \Leftrightarrow (b)$.
+	
+	\vspace{0.5em}
+	\noindent \textbf{($\Rightarrow$):} Giả sử $T$ là một cây bao trùm của $G$.
+	
+	\begin{itemize}
+		\item Khi đó, $T$ có tất cả các đỉnh của $G$, và liên thông.
+		\item Vì $T$ là cây nên không có chu trình và có đúng $n - 1$ cạnh, với $n = |V(G)|$.
+		\item Với bất kỳ đồ thị con liên thông nào khác $T' \in S$, nếu $T'$ không phải cây thì phải chứa chu trình $\rightarrow$ số cạnh > $n - 1$.
+	\end{itemize}
+	
+	\[
+	\Rightarrow T \in S \text{ và có số cạnh nhỏ nhất trong } S.
+	\]
+	
+	\vspace{0.5em}
+	\noindent \textbf{($\Leftarrow$):} Giả sử $T \in S$ và $T$ có số cạnh nhỏ nhất trong $S$.
+	
+	\begin{itemize}
+		\item Vì $T \in S$ nên $T$ liên thông và chứa toàn bộ đỉnh của $G$.
+		\item Giả sử $T$ có chu trình. Khi đó, ta có thể xóa một cạnh trong chu trình mà vẫn giữ liên thông.
+		\item Như vậy, ta có thể tạo một đồ thị $T'$ liên thông mới với ít cạnh hơn $\rightarrow$ mâu thuẫn với giả thiết rằng $T$ có số cạnh nhỏ nhất.
+	\end{itemize}
+	
+	\[
+	\Rightarrow T \text{ không có chu trình} \Rightarrow T \text{ là cây}.
+	\]
+	
+	Vì $T$ chứa tất cả đỉnh và là cây $\rightarrow$ $T$ là cây bao trùm.
+	
+	$\rightarrow$ T là cây bao trùm $\Leftrightarrow$ T $\in$ S và có số cạnh nhỏ nhất trong S
+	
+	\subsection*{10.2.21}
+	Một cây bao trùm (spanning tree) của đồ thị $G$ là một đồ thị con của $G$ có các tính chất:
+	\begin{itemize}
+		\item Bao gồm tất cả các đỉnh của $G$,
+		\item Liên thông,
+		\item Không chứa chu trình.
+	\end{itemize}
+	
+	Ta sẽ chứng minh bằng phương pháp xây dựng:
+	
+	\textbf{Bước 1:} Vì $G$ liên thông nên tồn tại ít nhất một đường đi giữa mọi cặp đỉnh.
+	
+	\textbf{Bước 2:} Lấy một đồ thị con $T$ của $G$ sao cho:
+	\begin{itemize}
+		\item $T$ chứa toàn bộ các đỉnh của $G$,
+		\item $T$ liên thông,
+		\item và số cạnh của $T$ là nhỏ nhất có thể (trong các đồ thị con liên thông).
+	\end{itemize}
+	
+	\textbf{Bước 3:} Ta chứng minh rằng $T$ không chứa chu trình:
+	
+	Giả sử ngược lại rằng $T$ có chu trình. Khi đó, ta có thể loại bỏ một cạnh trong chu trình mà không làm mất tính liên thông của $T$ (vì vẫn còn đường thay thế). Điều này mâu thuẫn với giả thiết rằng $T$ có số cạnh ít nhất.
+	
+	Do đó, $T$ không chứa chu trình.
+	
+	$T$ là đồ thị con của $G$, liên thông, chứa tất cả đỉnh, không có chu trình $\rightarrow$ $T$ là cây bao trùm của $G$.
+	
+	\textbf{Như vây:} mọi đồ thị liên thông (kể cả tổng quát) đều có ít nhất một cây bao trùm.
+	
+	\subsection*{10.2.22}
+	\subsubsection*{(a) Số cây bao trùm không đẳng cấu:}
+	
+	Một cây bao trùm của $K_4$ là một cây có 4 đỉnh và 3 cạnh.  
+	Với 4 đỉnh, có hai kiểu cây không đẳng cấu (xét theo cấu trúc):
+	
+	\begin{itemize}
+		\item \textbf{Kiểu 1 (cây hình ngôi sao):} Một đỉnh nối với ba đỉnh còn lại.  
+		Dạng: $(\text{bậc}) = (3,1,1,1)$
+		
+		\item \textbf{Kiểu 2 (cây đường thẳng):} Các đỉnh nối thành một đường (path).  
+		Dạng: $(\text{bậc}) = (2,2,1,1)$
+	\end{itemize}
+	
+	Vì không có cây nào khác (mỗi cây 4 đỉnh chỉ có 3 cạnh), nên:
+	
+	\[
+	\boxed{\text{Có 2 cây bao trùm không đẳng cấu của } K_4.}
+	\]
+	
+	\subsubsection*{(b) Số cây bao trùm phân biệt (gán nhãn):}
+	
+	Theo \textbf{định lý Cayley}, số cây bao trùm phân biệt trên $n$ đỉnh gán nhãn là:
+	
+	\[
+	n^{n - 2}
+	\Rightarrow 4^{4 - 2} = 4^2 = 16
+	\]
+	
+	\[
+	\boxed{\text{Có 16 cây bao trùm phân biệt của } K_4 \text{ khi đỉnh được gán nhãn.}}
+	\]
+	
+	\subsection*{10.2.23}
+	Vì cây bao trùm phải:
+	\begin{itemize}
+		\item Bao gồm tất cả 10 đỉnh,
+		\item Không có chu trình,
+		\item Có đúng $10 - 1 = 9$ cạnh,
+	\end{itemize}
+	nên ta chỉ cần chọn một tập gồm 9 cạnh từ $G$ mà vẫn kết nối toàn bộ đồ thị.
+	
+	Một ví dụ về cây bao trùm (dùng ký hiệu \{u,v\} cho cạnh nối đỉnh $u$ và $v$):
+	
+	\[
+	T = \{\{1,6\}, \{2,7\}, \{3,8\}, \{4,9\}, \{5,10\}, \{6,7\}, \{7,8\}, \{8,9\}, \{9,10\}\}
+	\]
+	
+	\begin{itemize}
+		\item Cây này nối đỉnh theo chuỗi từ 1 đến 10, qua các cạnh liên kết hình ngôi sao và lục giác trong đồ thị.
+		\item Không có chu trình, vì số cạnh đúng bằng $9$.
+		\item Kết nối toàn bộ $10$ đỉnh.
+	\end{itemize}
+	$\rightarrow$ Tập cạnh ở trên tạo thành một cây bao trùm của đồ thị $G$.
+	
+	\subsection*{10.2.24}
+	Vì đồ thị có $10$ đỉnh nên mọi cây bao trùm sẽ có đúng $10 - 1 = 9$ cạnh. Ta chọn một tập gồm 9 cạnh mà:
+	\begin{itemize}
+		\item Bao gồm tất cả đỉnh từ 1 đến 10,
+		\item Không tạo chu trình.
+	\end{itemize}
+	
+	Một ví dụ về cây bao trùm có thể chọn là:
+	
+	\[
+	T = \{\{1,2\}, \{2,3\}, \{3,4\}, \{4,5\}, \{5,10\}, \{10,6\}, \{6,7\}, \{7,8\}, \{8,9\}\}
+	\]
+	
+	\begin{itemize}
+		\item Tập cạnh này nối 10 đỉnh thành một cấu trúc đường đi từ 1 đến 9.
+		\item Tổng cộng đúng 9 cạnh.
+		\item Không tạo thành chu trình.
+		\item Kết nối toàn bộ đỉnh $\rightarrow$ là một cây bao trùm hợp lệ.
+	\end{itemize}
+	
+	\noindent \textbf{Như vậy:}
+	Một cây bao trùm của đồ thị Petersen có thể là:
+	\[
+	\boxed{
+		\{\{1,2\}, \{2,3\}, \{3,4\}, \{4,5\}, \{5,10\}, \{10,6\}, \{6,7\}, \{7,8\}, \{8,9\}\}
+	}
+	\]
+	\end{document}
