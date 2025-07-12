@@ -1,0 +1,462 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+
+\title{Combinatorics And Graph Theory}
+\author{Phạm Phước Minh Hiếu}
+
+\begin{document}
+	\section*{Bài 1:}
+	Có $m \in \mathbb{N}^\star$ ngăn trong một giá để sách được đánh số thứ tự $1, 2, \ldots, m$ và $n \in \mathbb{N}^\star$ quyển sách khác nhau. Xếp $n$ quyển sách này vào $m$ ngăn đó, các quyển sách được xếp thẳng đứng thành một hàng ngang với gáy sách quay ra ngoài ở mỗi ngăn.
+	
+	\smallskip
+	Khi đã xếp xong $n$ quyển sách, hai cách xếp được gọi là \textit{giống nhau} nếu chúng thỏa mãn đồng thời hai điều kiện sau:
+	\begin{itemize}
+		\item[(i)] Với từng ngăn, số lượng quyển sách ở ngăn đó là như nhau trong cả hai cách xếp.
+		\item[(ii)] Với từng ngăn, thứ tự từ trái sang phải của các quyển sách được xếp là như nhau trong cả hai cách xếp.
+	\end{itemize}
+	
+	\smallskip
+	Đếm số cách xếp đôi một khác nhau nếu:
+	\begin{itemize}
+		\item[(a)] Mỗi ngăn có ít nhất một quyển sách.
+		\item[(b)] Mỗi ngăn có thể không có quyển nào.
+	\end{itemize}
+	
+	\subsection*{Lời giải:}
+	Gọi các quyển sách là $S_1, S_2, \ldots, S_n$ (phân biệt nhau). Cần phân phối $n$ quyển sách vào $m$ ngăn, sao cho trong mỗi ngăn, các quyển sách được xếp có thứ tự (khác với tổ hợp đơn thuần).
+	
+	Hai cách xếp được coi là giống nhau nếu với mỗi ngăn, số lượng và thứ tự các quyển sách là giống nhau (tức là hoán đổi vị trí giữa các ngăn không làm thay đổi cách xếp).
+	
+	Tức là, ta phải đếm số cách phân chia $n$ quyển sách phân biệt thành $m$ dãy con có thứ tự, đôi một rời nhau, trong đó:
+	- Mỗi dãy con tương ứng với một ngăn.
+	- Các dãy được gán nhãn theo thứ tự từ 1 đến $m$ (vì các ngăn được đánh số thứ tự), nên hoán vị các ngăn là khác nhau.
+	
+	Có hai trường hợp:
+	
+	\noindent\textbf{(a) Mỗi ngăn có ít nhất một quyển sách:}
+	
+	Khi đó, ta cần phân chia $n$ quyển sách thành $m$ dãy con phân biệt (theo thứ tự trong từng dãy), không rỗng.
+	
+	Số cách như vậy là:
+	\[
+	\sum_{\substack{n_1 + n_2 + \cdots + n_m = n \\ n_i \ge 1}} \binom{n}{n_1, n_2, \ldots, n_m} \cdot \prod_{i=1}^{m} n_i!
+	= m! \cdot A
+	\]
+	- Trong đó $A$ là số cách chia $n$ phần tử phân biệt vào $m$ dãy có thứ tự, không rỗng.
+	
+	Nhưng thực ra có công thức tổng quát như sau:
+	
+	\[
+	\text{Số cách} = m! \cdot \left\{ \begin{array}{c} n \\ m \end{array} \right\} \cdot \prod_{i=1}^{m} n_i!
+	\]
+	
+	Tuy nhiên, do mỗi ngăn là cố định (đã đánh số), không hoán đổi, nên công thức rút gọn lại thành:
+	
+	\[
+	\boxed{
+		\sum_{\substack{n_1 + n_2 + \cdots + n_m = n \\ n_i \ge 1}} \binom{n}{n_1, n_2, \ldots, n_m}
+	}
+	\]
+	
+	Giải thích:
+	- $\binom{n}{n_1, n_2, \ldots, n_m}$: chọn quyển nào vào ngăn nào (không thay đổi thứ tự các ngăn).
+	- Sau đó, trong mỗi ngăn, ta sắp thứ tự các sách. Vì sách phân biệt, và thứ tự trong mỗi ngăn quan trọng, nên:
+	\[
+	\binom{n}{n_1, \ldots, n_m} \cdot \prod_{i=1}^m n_i! = n!
+	\]
+	(vì thứ tự trong toàn bộ giá sách là chuỗi $n$ sách đã được sắp thành từng dãy theo tổ hợp thứ tự).
+	
+	Do đó:
+	\[
+	\boxed{\text{Số cách xếp} = \text{Số phân hoạch } n \text{ thành } m \text{ số nguyên dương } \cdot n!}
+	\]
+	
+	Và số phân hoạch này chính là $\displaystyle \text{Số tổ hợp phân biệt có } m \text{ phần tử, tổng bằng } n$: $\binom{n-1}{m-1}$
+	
+	\[
+	\Rightarrow \boxed{\text{Số cách xếp} = \binom{n-1}{m-1} \cdot n!}
+	\]
+	
+	\vspace{1em}
+	\noindent\textbf{(b) Mỗi ngăn có thể không có quyển nào:}
+	
+	Tương tự, nhưng cho phép một số ngăn rỗng. Tức là phân $n$ sách vào $m$ dãy (có thứ tự trong từng dãy), trong đó mỗi quyển thuộc đúng một dãy, và dãy có thể rỗng.
+	
+	Mỗi quyển sách có thể được gán vào một trong $m$ ngăn. Vì sách phân biệt, và thứ tự trong mỗi ngăn quan trọng, nên:
+	
+	- Mỗi cách gán: chọn ngăn cho từng quyển sách $\Rightarrow$ có $m^n$ cách gán.
+	- Sau khi gán sách vào ngăn, vì thứ tự trong mỗi ngăn quan trọng, ta cần sắp xếp sách trong từng ngăn.
+	
+	Nhưng với mỗi cách phân chia, thứ tự đã được xác định, vì sách là phân biệt và thứ tự trong ngăn cũng quan trọng.
+	
+	=> Tổng số cách xếp là:
+	
+	\[
+	\boxed{m^n}
+	\]
+	
+	\vspace{1em}
+	\noindent\textbf{Tóm lại:}
+	
+	\begin{itemize}[leftmargin=2em]
+		\item[(a)] Nếu mỗi ngăn có ít nhất một quyển sách: \quad $\boxed{\binom{n-1}{m-1} \cdot n!}$
+		\item[(b)] Nếu ngăn có thể rỗng: \quad $\boxed{m^n}$
+	\end{itemize}
+	
+	\section*{Bài 2:}
+	 (a) Chứng minh đẳng thức Vandermonde
+	\begin{align*}
+		\sum_{i=0}^r \binom{m}{i}\binom{n}{r - i} = \binom{m + n}{r},\ \forall m,n,r\in\mathbb{N}.
+	\end{align*}
+	bằng 2 cách: 
+	\begin{itemize}
+		\item (i) Phương pháp tổ hợp.
+		\item (ii) Phương pháp đại số thông qua việc tính hệ số của $x^r$ trong khai triển của $(1 + x)^m(1 + x)^n$.
+	\end{itemize}
+	  (b) Chứng minh đẳng thức Vandermonde tổng quát:
+	\begin{align*}
+		\binom{\sum_{i=1}^p n_i}{m} = \sum_{\sum_{i=1}^p k_i = m} \prod_{i=1}^p \binom{n_i}{k_i},\mbox{ i.e., }\binom{n_1 + \cdots + n_p}{m} = \sum_{k_1 + \cdots + k_p = m} \binom{n_1}{k_1}\binom{n_2}{k_2}\cdots\binom{n_p}{k_p}.
+	\end{align*}
+	bằng 2 cách: 
+	\begin{itemize}
+		\item (i) Phương pháp tổ hợp.
+		\item (ii) Phương pháp đại số.
+	\end{itemize}
+	 
+	 \noindent \textbf{Lời giải:}
+	 
+	 \subsection*{(a) Chứng minh đẳng thức Vandermonde}
+	 \[
+	 \sum_{i=0}^r \binom{m}{i} \binom{n}{r - i} = \binom{m + n}{r},\quad \forall m,n,r \in \mathbb{N}
+	 \]
+	 
+	 \subsubsection*{(i) Chứng minh bằng phương pháp tổ hợp}
+		 
+	 Xét một tập $A$ gồm $m$ phần tử và tập $B$ gồm $n$ phần tử, hai tập rời nhau. Khi đó $|A \cup B| = m + n$.
+	 
+	 Số cách chọn $r$ phần tử từ $A \cup B$ là:
+	 \[
+	 \binom{m + n}{r}
+	 \]
+	 
+	 Mặt khác, để chọn $r$ phần tử từ $A \cup B$, ta có thể chọn $i$ phần tử từ $A$ (với $0 \le i \le r$), và $r - i$ phần tử từ $B$.
+	 
+	 Số cách như vậy là:
+	 \[
+	 \sum_{i = 0}^{r} \binom{m}{i} \binom{n}{r - i}
+	 \]
+	 
+	 Vì cả hai cách đều đếm số tổ hợp chọn $r$ phần tử từ $A \cup B$, nên:
+	 \[
+	 \sum_{i=0}^{r} \binom{m}{i} \binom{n}{r - i} = \binom{m + n}{r}
+	 \]
+	
+	\subsubsection*{(ii) Chứng minh bằng phương pháp đại số}
+	Xét khai triển nhị thức:
+	\[
+	(1 + x)^m (1 + x)^n = (1 + x)^{m + n}
+	\]
+	
+	Tính hệ số của $x^r$ ở cả hai vế:
+	
+	- Vế phải: Hệ số của $x^r$ là $\binom{m + n}{r}$.
+	
+	- Vế trái:
+	\[
+	(1 + x)^m (1 + x)^n = \left( \sum_{i=0}^{m} \binom{m}{i} x^i \right) \left( \sum_{j=0}^{n} \binom{n}{j} x^j \right)
+	\]
+	Hệ số của $x^r$ là:
+	\[
+	\sum_{i = 0}^{r} \binom{m}{i} \binom{n}{r - i}
+	\]
+	
+	Do đó:
+	\[
+	\sum_{i = 0}^{r} \binom{m}{i} \binom{n}{r - i} = \binom{m + n}{r}
+	\]
+	
+	\subsection*{Chứng minh đẳng thức Vandermonde tổng quát:}
+	
+	Cho $n_1, n_2, \ldots, n_p \in \mathbb{N}$ và $m \in \mathbb{N}$. Khi đó:
+	\[
+	\binom{n_1 + n_2 + \cdots + n_p}{m}
+	= \sum_{\substack{k_1 + \cdots + k_p = m}} \binom{n_1}{k_1} \binom{n_2}{k_2} \cdots \binom{n_p}{k_p}
+	\]
+	
+	\subsubsection*{(i) Chứng minh bằng phương pháp tổ hợp:}
+	
+	Gộp $p$ tập rời nhau $A_1, A_2, \ldots, A_p$, với $|A_i| = n_i$. Khi đó:
+	\[
+	\left| \bigcup_{i=1}^p A_i \right| = n_1 + n_2 + \cdots + n_p
+	\]
+	
+	Số cách chọn $m$ phần tử từ $\bigcup_{i=1}^p A_i$ là:
+	\[
+	\binom{n_1 + n_2 + \cdots + n_p}{m}
+	\]
+	
+	Mặt khác, để chọn $m$ phần tử từ đó, ta có thể chọn $k_i$ phần tử từ $A_i$, với $k_1 + k_2 + \cdots + k_p = m$.
+	
+	Số cách chọn như vậy là:
+	\[
+	\sum_{\substack{k_1 + \cdots + k_p = m}} \binom{n_1}{k_1} \binom{n_2}{k_2} \cdots \binom{n_p}{k_p}
+	\]
+	
+	Vì hai cách đếm đều tính số tổ hợp chọn $m$ phần tử từ hợp của các tập, nên đẳng thức được chứng minh.
+	
+	\subsubsection*{(ii) Chứng minh bằng phương pháp đại số:}
+	
+	Xét khai triển đa thức:
+	\[
+	(1 + x)^{n_1} (1 + x)^{n_2} \cdots (1 + x)^{n_p} = (1 + x)^{n_1 + n_2 + \cdots + n_p}
+	\]
+	
+	Tính hệ số của $x^m$ ở cả hai vế:
+	
+	- Vế phải: Hệ số là $\binom{n_1 + \cdots + n_p}{m}$.
+	
+	- Vế trái:
+	\[
+	\prod_{i=1}^{p} \left( \sum_{k_i=0}^{n_i} \binom{n_i}{k_i} x^{k_i} \right)
+	\]
+	Hệ số của $x^m$ là:
+	\[
+	\sum_{\substack{k_1 + \cdots + k_p = m}} \binom{n_1}{k_1} \binom{n_2}{k_2} \cdots \binom{n_p}{k_p}
+	\]
+	
+	Vậy ta có:
+	\[
+	\sum_{\substack{k_1 + \cdots + k_p = m}} \binom{n_1}{k_1} \cdots \binom{n_p}{k_p}
+	= \binom{n_1 + \cdots + n_p}{m}
+	\]
+		
+	\section*{Bài 3:}
+	
+	Chứng minh đẳng thức Hockey-stick:
+	
+	\begin{align*}
+		\sum_{i=r}^n \binom{i}{r} = \sum_{j=0}^{n - r} \binom{j + r}{r} = \sum_{j=0}^{n - r} \binom{j + r}{j} = \binom{n + 1}{n - r},\ \forall n,r\in\mathbb{N},\ n\ge r,
+	\end{align*}
+	bằng $4$ cách: 
+	
+	\begin{itemize}
+		\item (a) Quy nạp.
+		\item (b) Biến đổi đại số.
+		\item (c) Phương pháp tổ hợp.
+		\item (d) Sử dụng hàm sinh bằng cách tính hệ số của $x^r$ trong biểu thức $\sum_{i=r}^n (x + 1)^i = (x + 1)^r + (x + 1)^{r + 1} + \cdots + (x + 1)^n$.
+	\end{itemize}
+	   
+	\subsection*{Lời giải:}
+	
+	\subsubsection*{(a) Quy nạp:}
+	Gọi $P(n)$ là mệnh đề:
+	\[
+	\sum_{i=r}^n \binom{i}{r} = \binom{n + 1}{r + 1}
+	\]
+	Ta sẽ chứng minh $P(n)$ đúng với mọi $n \ge r$ bằng quy nạp theo $n$.
+	
+	\textbf{Cơ sở quy nạp:} Với $n = r$:
+	\[
+	\sum_{i=r}^r \binom{i}{r} = \binom{r}{r} = 1,\quad \binom{r + 1}{r + 1} = 1
+	\]
+	Vậy $P(r)$ đúng.
+	
+	\textbf{Bước quy nạp:} Giả sử $P(n)$ đúng, tức là:
+	\[
+	\sum_{i=r}^n \binom{i}{r} = \binom{n + 1}{r + 1}
+	\]
+	Xét $P(n + 1)$:
+	\[
+	\sum_{i=r}^{n + 1} \binom{i}{r} = \left( \sum_{i=r}^n \binom{i}{r} \right) + \binom{n + 1}{r}
+	= \binom{n + 1}{r + 1} + \binom{n + 1}{r} = \binom{n + 2}{r + 1}
+	\]
+	(dùng công thức Pascal: $\binom{n+1}{r+1} + \binom{n+1}{r} = \binom{n+2}{r+1}$)
+	
+	Vậy $P(n+1)$ đúng. Do đó, mệnh đề đúng với mọi $n \ge r$.
+	
+	\subsubsection*{(b) Biến đổi đại số:}
+	
+	Xét:
+	\[
+	\sum_{j=0}^{n - r} \binom{j + r}{r}
+	\]
+	Dùng định nghĩa nhị thức:
+	\[
+	\sum_{j=0}^{n - r} \binom{j + r}{r} = \sum_{j=0}^{n - r} \binom{j + r}{j}
+	\]
+	Đặt $k = j + r \Rightarrow j = k - r,\ k = r, r + 1, \ldots, n$
+	\[
+	\sum_{j=0}^{n - r} \binom{j + r}{j} = \sum_{k=r}^{n} \binom{k}{k - r} = \sum_{k=r}^{n} \binom{k}{r}
+	\]
+	Do đó:
+	\[
+	\sum_{i=r}^{n} \binom{i}{r} = \binom{n + 1}{r + 1}
+	\]
+	
+	\subsubsection*{(c) Phương pháp tổ hợp:}
+	
+	Xét một tập $A$ gồm $n + 1$ phần tử. Ta muốn đếm số cặp $(S, a)$ sao cho:
+	- $S \subseteq A$, $|S| = r + 1$
+	- $a \in S$ là phần tử lớn nhất
+	
+	Ta chọn phần tử $a = i + 1$, tức là có $i$ phần tử nhỏ hơn $a$, ta chọn $r$ phần tử từ $i$ phần tử này để cùng với $a$ tạo thành tập $S$.
+	
+	Số cách chọn như vậy là $\binom{i}{r}$. Vì $i$ chạy từ $r$ đến $n$, tổng số cách là:
+	\[
+	\sum_{i = r}^n \binom{i}{r}
+	\]
+	Mặt khác, tổng số tập con $S \subseteq A$ có đúng $r + 1$ phần tử là $\binom{n + 1}{r + 1}$. Vậy hai biểu thức bằng nhau:
+	\[
+	\sum_{i = r}^n \binom{i}{r} = \binom{n + 1}{r + 1}
+	\]
+	
+	\subsubsection*{(d) Sử dụng hàm sinh:}
+	
+	Xét biểu thức:
+	\[
+	\sum_{i=r}^n (x + 1)^i = (x + 1)^r + (x + 1)^{r + 1} + \cdots + (x + 1)^n
+	\]
+	Khai triển nhị thức:
+	\[
+	= \sum_{i=r}^{n} \sum_{k=0}^{i} \binom{i}{k} x^k
+	\]
+	Lấy hệ số của $x^r$:
+	\[
+	[x^r] \sum_{i=r}^{n} (x + 1)^i = \sum_{i=r}^{n} \binom{i}{r} = \binom{n + 1}{r + 1}
+	\]
+	(dùng kết quả chứng minh quy nạp ở trên)
+	
+	Do đó:
+	\[
+	\sum_{i = r}^{n} \binom{i}{r} = [x^r] \left( \sum_{i=r}^{n} (x + 1)^i \right) = \binom{n + 1}{r + 1}
+	\]
+	
+	\section*{Bài 4:}
+	
+	Chứng minh: \\
+	(a) Công thức Pascal $\binom{n - 1}{k} + \binom{n - 1}{k - 1} = \binom{n}{k}$ bằng 2 cách: 
+	
+	\begin{itemize}
+		\item (i) Biến đổi đại số.
+		\item (ii) Phương pháp tổ hợp.
+	\end{itemize}
+	
+	(b) Tìm công thức cho hệ số của $\prod_{i=1}^m x_i^{k_i} = x_1^{k_1}x_2^{k_2}\cdots x_m^{k_m}$ trong khai triển của $\left(\sum_{i=1}^m x_i\right)^n = (x_1 + x_2 + \cdots + x_m)^n$. 
+	 
+	 \vspace{1em}
+	 
+	(c) Đặt hệ số ở câu (b) là $c(m,n,k_1,k_2,\ldots,k_m)$, viết lại đẳng thức ở câu (a) với $m = 2$ theo ký hiệu này. Chứng minh quy tắc Pascal tổng quát:
+	 
+	{\footnotesize
+		\begin{align*}
+			&c(m,n - 1,k_1 - 1,k_2,k_3,\ldots,k_m) + c(m,n - 1,k_1,k_2 - 1,k_3,\ldots,k_m) + \cdots \\
+			&+ c(m,n - 1,k_1,k_2,k_3,\ldots,k_m - 1) = c(m,n,k_1,k_2,\ldots,k_m), \\
+			&\forall m\in\mathbb{N},\,m\ge2,\ k_i\in\mathbb{N}^\star,\ \forall i\in[m],\ \sum_{i=1}^m k_i = n.
+		\end{align*}
+	}
+	
+	\subsection*{(a) Chứng minh công thức Pascal:}
+	\[
+	\binom{n - 1}{k} + \binom{n - 1}{k - 1} = \binom{n}{k}
+	\]
+	
+	\begin{itemize}
+		\item[(i)] \textbf{Chứng minh bằng biến đổi đại số:}
+		
+		Sử dụng định nghĩa tổ hợp:
+		\[
+		\binom{n - 1}{k} + \binom{n - 1}{k - 1}
+		= \frac{(n - 1)!}{k!(n - 1 - k)!} + \frac{(n - 1)!}{(k - 1)!(n - k)!}
+		\]
+		Quy đồng mẫu số và rút gọn:
+		\[
+		= \frac{(n - 1)!}{k!(n - 1 - k)!} + \frac{(n - 1)!}{(k - 1)!(n - k)!}
+		= \frac{n!}{k!(n - k)!} = \binom{n}{k}
+		\]
+		
+		\item[(ii)] \textbf{Chứng minh bằng phương pháp tổ hợp:}
+		
+		Giả sử có một tập $A$ gồm $n$ phần tử. Ta muốn chọn $k$ phần tử từ $A$.
+		
+		Chọn một phần tử $a \in A$. Khi đó:
+		\begin{itemize}
+			\item Số cách chọn $k$ phần tử \textit{không chứa} $a$ là $\binom{n - 1}{k}$.
+			\item Số cách chọn $k$ phần tử \textit{có chứa} $a$: chọn $k - 1$ phần tử còn lại từ $A \setminus \{a\}$ $\Rightarrow$ có $\binom{n - 1}{k - 1}$ cách.
+		\end{itemize}
+		
+		Tổng số cách chọn là:
+		\[
+		\binom{n - 1}{k} + \binom{n - 1}{k - 1} = \binom{n}{k}
+		\]
+	\end{itemize}
+	
+	\subsection*{(b) Tìm công thức hệ số của $x_1^{k_1}x_2^{k_2}\cdots x_m^{k_m}$ trong khai triển}
+	\[
+	(x_1 + x_2 + \cdots + x_m)^n
+	\]
+	
+	Hệ số của $x_1^{k_1}x_2^{k_2}\cdots x_m^{k_m}$ là số cách chọn $k_1$ lần $x_1$, $k_2$ lần $x_2$, \ldots, $k_m$ lần $x_m$ sao cho tổng số lần chọn là $n$.
+	
+	Điều kiện: $k_1 + k_2 + \cdots + k_m = n$
+	
+	\textbf{Công thức hệ số:}
+	\[
+	c(m,n,k_1,\ldots,k_m) = \frac{n!}{k_1! k_2! \cdots k_m!}
+	\]
+	
+	\subsection*{(c) Viết lại đẳng thức Pascal và chứng minh quy tắc Pascal tổng quát}
+	
+	Với $m = 2$, đặt $k_1 = k$, $k_2 = n - k$, ta có:
+	\[
+	c(2,n,k,n - k) = \frac{n!}{k!(n - k)!} = \binom{n}{k}
+	\]
+	Khi đó, công thức Pascal trở thành:
+	\[
+	c(2,n,k,n-k) = c(2,n - 1,k - 1,n - k) + c(2,n - 1,k,n - k - 1)
+	\]
+	
+	\subsubsection*{Chứng minh quy tắc Pascal tổng quát:}
+	
+	Cho $m \ge 2$, các số $k_1, k_2, \ldots, k_m \in \mathbb{N}^\star$, với $\sum_{i=1}^m k_i = n$, ta có:
+	\[
+	\sum_{j = 1}^m c\left(m, n - 1, k_1, \ldots, k_j - 1, \ldots, k_m\right) = c(m,n,k_1,\ldots,k_m)
+	\]
+	
+	\textbf{Chứng minh bằng tổ hợp:}
+	
+	Khai triển đa thức $(x_1 + \cdots + x_m)^n$ gồm các tích đơn thức dạng $x_1^{k_1} \cdots x_m^{k_m}$ với tổng mũ bằng $n$.
+	
+	Để nhận được đơn thức $x_1^{k_1}\cdots x_m^{k_m}$, trong mỗi lần nhân (có $n$ lần chọn), ta chọn đúng $k_1$ lần $x_1$, ..., $k_m$ lần $x_m$.
+	
+	Số cách hoán vị các lần chọn chính là:
+	\[
+	c(m,n,k_1,\ldots,k_m) = \frac{n!}{k_1! \cdots k_m!}
+	\]
+	
+	Giờ xét cách sinh ra đơn thức này bằng cách thêm 1 biến từ bậc $n - 1$. Có $m$ cách:
+	- Từ $x_1^{k_1 - 1}x_2^{k_2} \cdots x_m^{k_m}$, ta thêm một $x_1$ để thành $x_1^{k_1}x_2^{k_2} \cdots x_m^{k_m}$, và tương tự cho các $x_j$.
+	
+	Mỗi đơn thức bậc $n - 1$ khi thêm biến $x_j$ sẽ có hệ số:
+	\[
+	c(m,n - 1, k_1,\ldots, k_j - 1, \ldots, k_m)
+	\]
+	
+	Cộng tất cả lại:
+	\[
+	\boxed{
+		\sum_{j=1}^{m} c\left(m, n - 1, k_1,\ldots, k_j - 1,\ldots, k_m\right) = c(m,n,k_1,\ldots,k_m)
+	}
+	\]
+	
+	\textbf{Điều kiện:} $k_i \ge 1$ với mọi $i \in [m]$, và $\sum_{i=1}^m k_i = n$.
+	
+	\section*{Bài 5:}
+	
+\end{document}
