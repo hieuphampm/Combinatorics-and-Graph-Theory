@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{positioning}
 \newcommand{\stirlingI}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
 \newcommand{\stirlingII}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
 \usetikzlibrary{graphs}
@@ -929,7 +930,23 @@
 	 
 	 \textbf{Định nghĩa:} Đồ thị đầy đủ $K_n$ là đồ thị đơn có $n$ đỉnh, trong đó mọi cặp đỉnh đều nối với nhau bằng đúng một cạnh.
 	 
-	 \textbf{Vẽ sơ đồ:} Ví dụ $K_4$:
+	 \textbf{Sơ đồ:} Ví dụ $K_4$:
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=2, every node/.style={circle, fill=black, inner sep=2pt}]
+	 		\node (A) at (0,0) {};
+	 		\node (B) at (1,0) {};
+	 		\node (C) at (0,1) {};
+	 		\node (D) at (1,1) {};
+	 	
+	 		\draw (A) -- (B);
+	 		\draw (A) -- (C);
+	 		\draw (A) -- (D);
+	 		\draw (B) -- (C);
+	 		\draw (B) -- (D);
+	 		\draw (C) -- (D);
+	 	\end{tikzpicture}
+	 \end{center}
 	 
 	 \[
 	 \text{4 đỉnh tạo thành 1 tứ giác đều, nối tất cả các cặp đỉnh}
@@ -946,7 +963,27 @@
 	 
 	 \textbf{Định nghĩa:} $P_n$ là đồ thị có $n$ đỉnh nối với nhau thành một đường đi thẳng, mỗi đỉnh chỉ nối với đỉnh liền kề (ngoại trừ hai đầu mút).
 	 
-	 \textbf{Vẽ sơ đồ:} $v_1 - v_2 - v_3 - \ldots - v_n$
+	 \textbf{Sơ đồ:} $v_1 - v_2 - v_3 - \ldots - v_n$
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=1.2, every node/.style={circle, fill=black, inner sep=2pt}]
+	 		\node (v1) at (0,0) {};
+	 		\node (v2) at (1,0) {};
+	 		\node (v3) at (2,0) {};
+	 		\node (v4) at (3,0) {};
+	 		
+	 		\draw (v1) -- (v2);
+	 		\draw (v2) -- (v3);
+	 		\draw (v3) -- (v4);
+	 		
+	 		\node[below=3pt] at (v1) {$v_1$};
+	 		\node[below=3pt] at (v2) {$v_2$};
+	 		\node[below=3pt] at (v3) {$v_3$};
+	 		\node[below=3pt] at (v4) {$\cdots$};
+	 		
+	 		\node at (3.6, 0) {$\cdots$};
+	 	\end{tikzpicture}
+	 \end{center}
 	 
 	 \textbf{Số cạnh:} $n - 1$ (nối liên tiếp từ $v_1$ đến $v_n$)
 	 
@@ -963,7 +1000,33 @@
 	 
 	 \textbf{Định nghĩa:} $C_n$ là đồ thị tạo thành chu trình với $n$ đỉnh, mỗi đỉnh nối với 2 đỉnh kề bên, và đỉnh cuối nối với đỉnh đầu.
 	 
-	 \textbf{Vẽ sơ đồ:} $v_1 - v_2 - \ldots - v_n - v_1$
+	 \textbf{Sơ đồ:} $v_1 - v_2 - \ldots - v_n - v_1$
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=2, every node/.style={circle, fill=black, inner sep=1.8pt}]
+	 		\node (v1) at (90:1) {};
+	 		\node (v2) at (135:1) {};
+	 		\node (v3) at (180:1) {};
+	 		\node (v4) at (225:1) {};
+	 		\node (v5) at (270:1) {};
+	 		\node (v6) at (315:1) {};
+	 		\node (v7) at (0:1) {};
+	 		\node (v8) at (45:1) {};
+	 		
+	 		\draw (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v7) -- (v8) -- (v1);
+	 		
+	 		\node at (90:1.25) {$v_1$};
+	 		\node at (135:1.25) {$v_2$};
+	 		\node at (180:1.25) {$v_3$};
+	 		\node at (225:1.25) {$v_4$};
+	 		\node at (270:1.25) {$v_5$};
+	 		\node at (315:1.25) {$v_6$};
+	 		\node at (0:1.25) {$v_7$};
+	 		\node at (45:1.25) {$v_8$};
+	 		
+	 	\end{tikzpicture}
+	 \end{center}
+	 
 	 
 	 \textbf{Số cạnh:} $n$ (vì thêm cạnh đóng chu trình)
 	 
@@ -976,7 +1039,31 @@
 	 
 	 \textbf{Định nghĩa:} $W_{n+1}$ là đồ thị tạo bằng cách thêm một đỉnh trung tâm vào đồ thị chu trình $C_n$, rồi nối đỉnh này với tất cả các đỉnh của chu trình.
 	 
-	 \textbf{Vẽ sơ đồ:} $C_n$ là đường tròn, nối thêm đỉnh trung tâm $v_0$ đến tất cả các đỉnh trên chu trình.
+	 \textbf{Sơ đồ:} $C_n$ là đường tròn, nối thêm đỉnh trung tâm $v_0$ đến tất cả các đỉnh trên chu trình.
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=2, every node/.style={circle, fill=black, inner sep=2pt}]
+	 		
+	 		\node (C) at (0,0) {};          
+	 		\node (T) at (0,1) {};          
+	 		\node (B) at (0,-1) {};         
+	 		\node (L) at (-1,0.5) {};       
+	 		\node (R) at (1,0.5) {};       
+	 		\node (L2) at (-1,-0.5) {};     
+	 		\node (R2) at (1,-0.5) {};      
+	 		
+	 		\draw (C) -- (T);
+	 		\draw (C) -- (B);
+	 		\draw (C) -- (L);
+	 		\draw (C) -- (R);
+	 		\draw (C) -- (L2);
+	 		\draw (C) -- (R2);
+	 		
+	 		\draw (L) -- (L2);
+	 		\draw (R) -- (R2);
+	 		
+	 	\end{tikzpicture}
+	 \end{center}
 	 
 	 \textbf{Số cạnh:} 
 	 \[
@@ -1002,6 +1089,36 @@
 	 	\item $C_n$ là đồ thị 2-chính quy.
 	 \end{itemize}
 	 
+	 \textbf{Sơ đồ:}
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=1.5, every node/.style={circle, fill=black, inner sep=2pt}]
+	 		\node[inner sep=4pt] (v0) at (0,0) {};
+	 		
+	 		\node (v1) at (1,1.5) {};
+	 		\node (v2) at (2,1.5) {};
+	 		\node (v3) at (2,0) {};
+	 		\node (v4) at (1,-1.5) {};
+	 		\node (v5) at (2,-1.5) {};
+	 		
+	 		\node[left=3pt] at (v0) {$v_0$};
+	 		
+	 		\draw (v0) -- (v1);
+	 		\draw (v0) -- (v2);
+	 		\draw (v0) -- (v3);
+	 		\draw (v0) -- (v4);
+	 		\draw (v0) -- (v5);
+	 		
+	 		\draw (v1) -- (v2);
+	 		\draw (v1) -- (v3);
+	 		\draw (v1) -- (v4);
+	 		\draw (v2) -- (v3);
+	 		\draw (v2) -- (v5);
+	 		\draw (v3) -- (v4);
+	 		\draw (v3) -- (v5);
+	 	\end{tikzpicture}
+	 \end{center}
+	 
 	 \textbf{Số cạnh:} Gọi $n$ là số đỉnh, $r$ là bậc mỗi đỉnh, thì:
 	 \[
 	 \text{Tổng bậc} = nr = 2|E| \Rightarrow |E| = \frac{nr}{2}
@@ -1013,7 +1130,26 @@
 	 
 	 \textbf{Định nghĩa:} $K_{m,n}$ là đồ thị gồm hai tập đỉnh $U$ và $V$ với $|U| = m$, $|V| = n$, mọi đỉnh trong $U$ nối với mọi đỉnh trong $V$.
 	 
-	 \textbf{Vẽ sơ đồ:} Hai cột đỉnh, mỗi đỉnh bên trái nối tất cả với bên phải.
+	 \textbf{Sơ đồ:} Hai cột đỉnh, mỗi đỉnh bên trái nối tất cả với bên phải.
+	 
+	 \begin{center}
+	 	\begin{tikzpicture}[scale=1.5, every node/.style={circle, fill=black, inner sep=2pt}]
+	 		\node (a1) at (0,2) {};
+	 		\node (a2) at (1,2) {};
+	 		\node (a3) at (2,2) {};
+	 		\node (a4) at (3,2) {};
+	 		
+	 		\node (b1) at (0,0) {};
+	 		\node (b2) at (1,0) {};
+	 		\node (b3) at (2,0) {};
+	 		\node (b4) at (3,0) {};
+	 		
+	 		\draw (a1) -- (b4);
+	 		\draw (a2) -- (b3);
+	 		\draw (a3) -- (b2);
+	 		\draw (a4) -- (b1);
+	 	\end{tikzpicture}
+	 \end{center}
 	 
 	 \textbf{Số cạnh:} Mỗi đỉnh bên $U$ nối với $n$ đỉnh bên $V$: 
 	 \[
