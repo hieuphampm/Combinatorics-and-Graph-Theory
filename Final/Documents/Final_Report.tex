@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+
+\title{Combinatorics And Graph Theory-Final}
+\author{Phạm Phước Minh Hiếu}
+
+\begin{document}
+	\section{Project 1: Mathematical Induction {\it\&} Recurrence Relations -- Đồ Án 1: Quy Nạp Toán Học {\it\&} Quan Hệ Truy Hồi}
+	
+	\subsection{Mathematical Induction -- Quy nạp toán học}
+	
+	\textbf{Định lý.} Với mọi $n \in \mathbb{N},\ n \ge 1$, ta có:
+	\[
+	\sum_{k=1}^{n} k = \frac{n(n+1)}{2}.
+	\]
+	
+	\textbf{Chứng minh:} Sử dụng phương pháp quy nạp toán học.
+	
+	\begin{itemize}[leftmargin=1.5cm]
+		\item \textbf{Cơ sở quy nạp:} Với $n = 1$:
+		\[
+		\sum_{k=1}^{1} k = 1 = \frac{1(1+1)}{2} = 1.
+		\]
+		Đúng.
+		
+		\item \textbf{Giả thiết quy nạp:} Giả sử công thức đúng với $n = k$, tức là:
+		\[
+		\sum_{i=1}^{k} i = \frac{k(k+1)}{2}.
+		\]
+		
+		\item \textbf{Bước quy nạp:} Xét $n = k + 1$:
+		\begin{align*}
+			\sum_{i=1}^{k+1} i &= \left(\sum_{i=1}^{k} i\right) + (k+1) \\
+			&= \frac{k(k+1)}{2} + (k+1) \quad \text{(theo giả thiết quy nạp)}\\
+			&= \frac{k(k+1) + 2(k+1)}{2} \\
+			&= \frac{(k+1)(k + 2)}{2}.
+		\end{align*}
+		Đây chính là công thức với $n = k + 1$.
+		
+		\item \textbf{Kết luận:} Theo nguyên lý quy nạp, mệnh đề được chứng minh đúng với mọi $n \in \mathbb{N},\ n \ge 1$.
+	\end{itemize}
+	
+	\subsection{Recurrence Relation -- Quan hệ truy hồi}
+	
+	\textbf{Đề bài:} Xét dãy truy hồi:
+	\[
+	a_1 = 1,\quad a_n = a_{n-1} + 2n - 1 \quad \text{với } n \ge 2.
+	\]
+	
+	\textbf{Tìm công thức tổng quát của $a_n$ theo $n$.}
+	
+	\textbf{Giải:}
+	
+	Ta tính một vài giá trị đầu:
+	\[
+	a_1 = 1,\quad a_2 = 1 + 3 = 4,\quad a_3 = 4 + 5 = 9,\quad a_4 = 9 + 7 = 16.
+	\]
+	
+	Dễ thấy:
+	\[
+	a_n = n^2.
+	\]
+	
+	\textbf{Chứng minh bằng quy nạp:}
+	
+	\begin{itemize}[leftmargin=1.5cm]
+		\item \textbf{Cơ sở:} $n = 1$: $a_1 = 1 = 1^2$, đúng.
+		
+		\item \textbf{Giả thiết quy nạp:} Giả sử $a_k = k^2$ đúng với một $k \ge 1$.
+		
+		\item \textbf{Bước quy nạp:}
+		\[
+		a_{k+1} = a_k + 2(k+1) - 1 = k^2 + 2k + 1 = (k+1)^2.
+		\]
+		
+		\item \textbf{Kết luận:} $a_n = n^2$ với mọi $n \in \mathbb{N},\ n \ge 1$.
+	\end{itemize}
+	
+	\section{Project 2: Counting, Probability, Balls, \& Boxes -- Đồ Án 2: Đếm, Xác Suất, Banh \& Hộp}
+	
+	\textbf{Cho 5 quả banh phân biệt và 3 hộp phân biệt.}
+	
+	\begin{itemize}[leftmargin=1.5cm]
+		\item[(a)] Có bao nhiêu cách đặt 5 quả banh vào 3 hộp?
+		\item[(b)] Nếu mỗi quả banh được đặt ngẫu nhiên vào một hộp (các quả độc lập, xác suất như nhau), xác suất có ít nhất một hộp trống là bao nhiêu?
+	\end{itemize}
+	
+	\subsection*{Câu (a):}
+	Mỗi quả banh có 3 lựa chọn để vào một trong 3 hộp.
+	
+	Vì các quả banh là phân biệt và được đặt độc lập:
+	\[
+	\text{Tổng số cách} = 3^5 = 243.
+	\]
+	
+	\subsection*{Câu (b):}
+	Ta cần tính:
+	\[
+	\mathbb{P}(\text{ít nhất một hộp trống}) = 1 - \mathbb{P}(\text{không có hộp nào trống}).
+	\]
+	
+	\textbf{Gọi $A$ là biến cố “không có hộp nào trống”}
+	
+	Áp dụng nguyên lý bao hàm – loại trừ (Inclusion–Exclusion), ta tính số cách phân chia 5 quả banh (phân biệt) vào 3 hộp (phân biệt) sao cho mỗi hộp có ít nhất 1 quả (không rỗng).
+	
+	Số cách:
+	\[
+	N = 3^5 - \binom{3}{1} 2^5 + \binom{3}{2} 1^5 = 243 - 3 \cdot 32 + 3 \cdot 1 = 243 - 96 + 3 = 150.
+	\]
+	
+	Vậy xác suất để không hộp nào trống là:
+	\[
+	\mathbb{P}(A) = \frac{150}{243}.
+	\]
+	
+	Vậy xác suất có ít nhất một hộp trống:
+	\[
+	1 - \frac{150}{243} = \frac{93}{243} = \frac{31}{81}.
+	\]
+	
+\end{document}
