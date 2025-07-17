@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{fancyvrb}
 \usepackage{tikz}
 \usetikzlibrary{graphs}
 \usepackage[utf8]{inputenc}
@@ -191,5 +192,51 @@
 	
 	$\Rightarrow [x^{10}]\,G(x) = 10.$
 	
+	\section*{Project: Integer Partition -- Đồ Án: Phân Hoạch Số Nguyên}
 	
+	\subsection*{\underline{Bài toán 1:} Ferrers \& Ferrers transpose diagrams -- Biểu đồ Ferrers \& biểu đồ Ferrers chuyển vị}
+	
+	Nhập $n,k\in\mathbb{N}$. Viết chương trình {\sf C{\tt/}C++, Python} để in ra $p_k(n)$ biểu đồ Ferrers $F$ \& biểu đồ Ferrers chuyển vị $F^\top$ cho mỗi phân hoạch $\boldsymbol{\lambda} = (\lambda_1,\lambda_2,\ldots,\lambda_k)\in(\mathbb{N}^\star)^k$ có định dạng các dấu chấm được biểu diễn bởi dấu {\tt*}.
+	
+	\textbf{Ví dụ:}
+	
+	Cho $n = 5$, $k = 2$. Các phân hoạch của 5 thành đúng 2 phần tử là:
+	
+	\begin{itemize}
+		\item $(4,1)$
+		\item $(3,2)$
+	\end{itemize}
+	
+	Biểu diễn Ferrers và Ferrers chuyển vị:
+	
+	\subsubsection*{Phân hoạch $(4,1)$}
+	
+	\textbf{Ferrers:}
+	\begin{Verbatim}
+		****
+		*
+	\end{Verbatim}
+	
+	\textbf{Ferrers chuyển vị:}
+	\begin{Verbatim}
+		**
+		*
+		*
+		*
+	\end{Verbatim}
+	
+	\subsubsection*{Phân hoạch $(3,2)$}
+	
+	\textbf{Ferrers:}
+	\begin{Verbatim}
+		***
+		**
+	\end{Verbatim}
+	
+	\textbf{Ferrers chuyển vị:}
+	\begin{Verbatim}
+		**
+		**
+		*
+	\end{Verbatim}
 \end{document}
