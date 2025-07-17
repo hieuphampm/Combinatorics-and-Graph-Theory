@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{fancyvrb}
+\usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{graphs}
 \usepackage[utf8]{inputenc}
@@ -239,4 +240,56 @@
 		**
 		*
 	\end{Verbatim}
+	
+	\subsection*{\underline{Bài toán 2:} Nhập $n,k\in\mathbb{N}$. Đếm số phân hoạch của $n\in\mathbb{N}$. Viết chương trình {\sf C{\tt/}C++, Python} để đếm số phân hoạch $p_{\max}(n,k)$ của $n$ sao cho phần tử lớn nhất là $k$. So sánh $p_k(n)$ \& $p_{\max}(n,k)$.
+	}
+	
+	\textbf{Theo đề bài:} Cho $n, k \in \mathbb{N}$. Đếm:
+	\begin{itemize}
+		\item $p_k(n)$: số phân hoạch của $n$ thành đúng $k$ số nguyên dương.
+		\item $p_{\max}(n, k)$: số phân hoạch của $n$ sao cho phần tử lớn nhất đúng bằng $k$.
+	\end{itemize}
+	
+	\begin{itemize}
+		\item $p_k(n)$: Số phân hoạch của $n$ thành đúng $k$ số nguyên dương, tức là:
+		\[
+		n = \lambda_1 + \lambda_2 + \cdots + \lambda_k,\quad \lambda_i \in \mathbb{N}^+
+		\]
+		\item $p_{\max}(n, k)$: Số phân hoạch của $n$ sao cho phần tử lớn nhất trong phân hoạch bằng đúng $k$.
+	\end{itemize}
+	
+	\textbf{Cho một ví dụ với $n=5$}
+	
+	\begin{itemize}
+		\item Các phân hoạch thành đúng $k=2$ phần tử:
+		\[
+		(4,1), (3,2)
+		\quad\Rightarrow\quad p_2(5) = 2
+		\]
+		\item Các phân hoạch của $n=5$ có phần tử lớn nhất là $k=2$:
+		\[
+		(2,2,1), (2,1,1,1), (1,1,1,1,1)
+		\quad\Rightarrow\quad p_{\max}(5,2) = 3
+		\]
+	\end{itemize}
+	
+	\[
+	p_2(5) = 2 \quad\text{vs.}\quad p_{\max}(5,2) = 3
+	\]
+	\newpage
+	\textbf{Thử so sánh với $p_2$(n) và $p_{max}$(n,2)}
+	\begin{center}
+		\begin{tabular}{@{}ccc@{}}
+			\toprule
+			$n$ & $p_2(n)$ & $p_{\max}(n,2)$ \\
+			\midrule
+			1 & 0 & 0 \\
+			2 & 1 & 1 \\
+			3 & 1 & 1 \\
+			4 & 2 & 2 \\
+			5 & 2 & 3 \\
+			6 & 3 & 4 \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
 \end{document}
