@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.10)  17 JUL 2025 20:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.10)  17 JUL 2025 21:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -751,7 +751,7 @@ LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 2
 
 (C:\Program Files\MiKTeX\tex/latex/vntex\t5cmtt.fd
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [4] [5] [6] [7]
+) [4] [5] [6]
 (Final_Report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -788,9 +788,9 @@ iKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/symbo
 ls/msbm10.pfb>
-Output written on Final_Report.pdf (7 pages, 257563 bytes).
+Output written on Final_Report.pdf (6 pages, 256096 bytes).
 PDF statistics:
- 464 PDF objects out of 1000 (max. 8388607)
+ 458 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
