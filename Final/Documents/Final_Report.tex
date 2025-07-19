@@ -284,4 +284,70 @@
 			\bottomrule
 		\end{tabular}
 	\end{center}
+	
+	\subsection*{Số phân hoạch tự liên hợp}
+	 Nhập $n,k\in\mathbb{N}$. 
+	 \begin{itemize}
+	 	\item (a) Đếm số phân hoạch tự liên hợp của $n$ có $k$ phần, ký hiệu $p_k^{\rm selfcjg}(n)$, rồi in ra các phân hoạch đó.
+	 	\item (b) Đếm số phân hoạch của $n$ có lẻ phần, rồi so sánh với $p_k^{\rm selfcjg}(n)$.
+	 	\item (c) Thiết lập công thức truy hồi cho $p_k^{\rm selfcjg}(n)$, rồi implementation bằng: (i) đệ quy. (ii) quy hoạch động.
+	 \end{itemize}
+	   
+	Cho $n,k\in\mathbb{N}$.
+	
+	\begin{itemize}
+		\item[(a)] Đếm số phân hoạch tự liên hợp của $n$ có đúng $k$ phần, ký hiệu là $p_k^{\text{selfcjg}}(n)$ và liệt kê các phân hoạch đó.
+		
+		\textbf{Ví dụ:} Với $n=7$, các phân hoạch tự liên hợp gồm: 
+		\[
+		(4,3),\quad (3,3,1),\quad (2,2,2,1),\quad (1,1,1,1,1,1,1)
+		\]
+		Khi lọc theo số phần $k$, ta chỉ giữ các phân hoạch có đúng $k$ phần tử.
+		
+		\item[(b)] Đếm số phân hoạch của $n$ có số phần tử là số lẻ. So sánh giá trị đó với $p_k^{\text{selfcjg}}(n)$.  
+		Ký hiệu tổng số phân hoạch có số phần lẻ là $q(n)$.
+		
+		\textbf{Định lý:} Tổng số phân hoạch tự liên hợp của $n$ đúng bằng số phân hoạch có số phần tử lẻ (Euler).
+		
+		\item[(c)] \textbf{Thiết lập công thức truy hồi cho $p_k^{\text{selfcjg}}(n)$}
+		
+		Gọi $p_k^{\text{selfcjg}}(n)$ là số phân hoạch \textbf{tự liên hợp} của $n$ thành đúng $k$ phần.
+		
+		Do một phân hoạch tự liên hợp luôn gồm các số lẻ không tăng và không vượt quá $k$, do đối xứng qua đường chéo chính của biểu đồ Ferrers.
+		
+		Ta có thể định nghĩa truy hồi như sau:
+		
+		\[
+		p_k^{\text{selfcjg}}(n) =
+		\begin{cases}
+			1, & \text{nếu } n = 0 \text{ và } k = 0 \\
+			0, & \text{nếu } n < 0 \text{ hoặc } k \leq 0 \\
+			\sum\limits_{\substack{1 \leq m \leq \min(2k-1,n)\\ m \text{ lẻ}}} p_{k-1}^{\text{selfcjg}}(n - m), & \text{ngược lại}
+		\end{cases}
+		\]
+		
+		
+		$\rightarrow$ Mỗi phần thêm vào là một số lẻ $m$, ta trừ nó khỏi $n$ và giảm số phần đi 1.
+		
+		$\rightarrow$ Ràng buộc số lẻ xuất hiện là do cấu trúc đối xứng: mỗi điểm ở trên đường chéo cần đối xứng với một điểm dưới đường chéo, nên số phần tử ở mỗi dòng phải lẻ.
+		
+		\textbf{Ngoài ra}, ta có thể thiết lập công thức không phụ thuộc vào $k$, khi đếm tổng số phân hoạch tự liên hợp (tức là $p^{\text{selfcjg}}(n) = \sum_k p_k^{\text{selfcjg}}(n)$):
+		
+		\[
+		p^{\text{selfcjg}}(n) = \# \left\{ (\lambda_1, \lambda_2, \dots, \lambda_k) \mid \sum_{i=1}^k \lambda_i = n,\ \lambda_i \text{ lẻ},\ \lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_k,\ \lambda_i \geq i \right\}
+		\]
+		
+		Trong đó điều kiện \( \lambda_i \geq i \) đảm bảo đối xứng qua đường chéo chính.
+		
+		\textbf{Công thức tạo hàm sinh:} Hàm sinh của số phân hoạch tự liên hợp là:
+		
+		\[
+		\sum_{n=0}^\infty p^{\text{selfcjg}}(n) q^n = \prod_{k=1}^\infty (1 + q^{2k-1})
+		\]
+		
+		Do mỗi phần tử trong phân hoạch tự liên hợp tương ứng với một chiều dài móc câu (hook length) lẻ.
+		
+		
+	\end{itemize}
+	
 \end{document}
