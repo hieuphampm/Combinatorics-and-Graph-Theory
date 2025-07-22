@@ -261,30 +261,35 @@
 		\]
 		\item Các phân hoạch của $n=5$ có phần tử lớn nhất là $k=2$:
 		\[
-		(2,2,1), (2,1,1,1), (1,1,1,1,1)
-		\quad\Rightarrow\quad p_{\max}(5,2) = 3
+		(2,2,1), (1,1,1,2)
+		\quad\Rightarrow\quad p_{\max}(5,2) = 2
 		\]
 	\end{itemize}
 	
 	\[
-	p_2(5) = 2 \quad\text{vs.}\quad p_{\max}(5,2) = 3
+	p_2(5) = 2 \quad\text{vs.}\quad p_{\max}(5,2) = 2
 	\]
 	\newpage
-	\textbf{Thử so sánh với $p_2$(n) và $p_{max}$(n,2)}
-	\begin{center}
-		\begin{tabular}{@{}ccc@{}}
-			\toprule
-			$n$ & $p_2(n)$ & $p_{\max}(n,2)$ \\
-			\midrule
-			1 & 0 & 0 \\
-			2 & 1 & 1 \\
-			3 & 1 & 1 \\
-			4 & 2 & 2 \\
-			5 & 2 & 3 \\
-			6 & 3 & 4 \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
+	\textbf{Bảng so sánh \( p_2(n) \) và \( p_{\max}(n, 2) \):}
+	
+	\[
+	\begin{array}{|c|c|c|}
+		\hline
+		n & p_2(n) & p_{\max}(n, 2) \\
+		\hline
+		1 & 0 & 0 \\
+		2 & 1 & 1 \\
+		3 & 1 & 1 \\
+		4 & 2 & 2 \\
+		5 & 2 & 1 \\
+		6 & 3 & 2 \\
+		7 & 3 & 3 \\
+		8 & 4 & 4 \\
+		9 & 4 & 4 \\
+		10 & 5 & 5 \\
+		\hline
+	\end{array}
+	\]
 	
 	\subsection*{Số phân hoạch tự liên hợp}
 	 Nhập $n,k\in\mathbb{N}$. 
