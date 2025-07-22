@@ -12,189 +12,10 @@
 \usepackage[vietnamese]{babel}
 
 \title{Combinatorics And Graph Theory-Final}
-\author{Phạm Phước Minh Hiếu}
+\author{Phạm Phước Minh Hiếu - 2201700085}
 
 \begin{document}
 	\maketitle
-	\section*{Project 1: Mathematical Induction {\it\&} Recurrence Relations -- Đồ Án 1: Quy Nạp Toán Học {\it\&} Quan Hệ Truy Hồi}
-	
-	\subsection{Mathematical Induction -- Quy nạp toán học}
-	
-	\textbf{Định lý.} Với mọi $n \in \mathbb{N},\ n \ge 1$, ta có:
-	\[
-	\sum_{k=1}^{n} k = \frac{n(n+1)}{2}.
-	\]
-	
-	\textbf{Chứng minh:} Sử dụng phương pháp quy nạp toán học.
-	
-	\begin{itemize}[leftmargin=1.5cm]
-		\item \textbf{Cơ sở quy nạp:} Với $n = 1$:
-		\[
-		\sum_{k=1}^{1} k = 1 = \frac{1(1+1)}{2} = 1.
-		\]
-		Đúng.
-		
-		\item \textbf{Giả thiết quy nạp:} Giả sử công thức đúng với $n = k$, tức là:
-		\[
-		\sum_{i=1}^{k} i = \frac{k(k+1)}{2}.
-		\]
-		
-		\item \textbf{Bước quy nạp:} Xét $n = k + 1$:
-		\begin{align*}
-			\sum_{i=1}^{k+1} i &= \left(\sum_{i=1}^{k} i\right) + (k+1) \\
-			&= \frac{k(k+1)}{2} + (k+1) \quad \text{(theo giả thiết quy nạp)}\\
-			&= \frac{k(k+1) + 2(k+1)}{2} \\
-			&= \frac{(k+1)(k + 2)}{2}.
-		\end{align*}
-		Đây chính là công thức với $n = k + 1$.
-		
-		\item \textbf{Kết luận:} Theo nguyên lý quy nạp, mệnh đề được chứng minh đúng với mọi $n \in \mathbb{N},\ n \ge 1$.
-	\end{itemize}
-	
-	\subsection{Recurrence Relation -- Quan hệ truy hồi}
-	
-	\textbf{Đề bài:} Xét dãy truy hồi:
-	\[
-	a_1 = 1,\quad a_n = a_{n-1} + 2n - 1 \quad \text{với } n \ge 2.
-	\]
-	
-	\textbf{Tìm công thức tổng quát của $a_n$ theo $n$.}
-	
-	\textbf{Giải:}
-	
-	Ta tính một vài giá trị đầu:
-	\[
-	a_1 = 1,\quad a_2 = 1 + 3 = 4,\quad a_3 = 4 + 5 = 9,\quad a_4 = 9 + 7 = 16.
-	\]
-	
-	Dễ thấy:
-	\[
-	a_n = n^2.
-	\]
-	
-	\textbf{Chứng minh bằng quy nạp:}
-	
-	\begin{itemize}[leftmargin=1.5cm]
-		\item \textbf{Cơ sở:} $n = 1$: $a_1 = 1 = 1^2$, đúng.
-		
-		\item \textbf{Giả thiết quy nạp:} Giả sử $a_k = k^2$ đúng với một $k \ge 1$.
-		
-		\item \textbf{Bước quy nạp:}
-		\[
-		a_{k+1} = a_k + 2(k+1) - 1 = k^2 + 2k + 1 = (k+1)^2.
-		\]
-		
-		\item \textbf{Kết luận:} $a_n = n^2$ với mọi $n \in \mathbb{N},\ n \ge 1$.
-	\end{itemize}
-	
-	\section*{Project 2: Counting, Probability, Balls, \& Boxes -- Đồ Án 2: Đếm, Xác Suất, Banh \& Hộp}
-	
-	\textbf{Cho 5 quả banh phân biệt và 3 hộp phân biệt.}
-	
-	\begin{itemize}[leftmargin=1.5cm]
-		\item[(a)] Có bao nhiêu cách đặt 5 quả banh vào 3 hộp?
-		\item[(b)] Nếu mỗi quả banh được đặt ngẫu nhiên vào một hộp (các quả độc lập, xác suất như nhau), xác suất có ít nhất một hộp trống là bao nhiêu?
-	\end{itemize}
-	
-	\subsection*{Câu (a):}
-	Mỗi quả banh có 3 lựa chọn để vào một trong 3 hộp.
-	
-	Vì các quả banh là phân biệt và được đặt độc lập:
-	\[
-	\text{Tổng số cách} = 3^5 = 243.
-	\]
-	
-	\subsection*{Câu (b):}
-	Ta cần tính:
-	\[
-	\mathbb{P}(\text{ít nhất một hộp trống}) = 1 - \mathbb{P}(\text{không có hộp nào trống}).
-	\]
-	
-	\textbf{Gọi $A$ là biến cố “không có hộp nào trống”}
-	
-	Áp dụng nguyên lý bao hàm – loại trừ (Inclusion–Exclusion), ta tính số cách phân chia 5 quả banh (phân biệt) vào 3 hộp (phân biệt) sao cho mỗi hộp có ít nhất 1 quả (không rỗng).
-	
-	Số cách:
-	\[
-	N = 3^5 - \binom{3}{1} 2^5 + \binom{3}{2} 1^5 = 243 - 3 \cdot 32 + 3 \cdot 1 = 243 - 96 + 3 = 150.
-	\]
-	
-	Vậy xác suất để không hộp nào trống là:
-	\[
-	\mathbb{P}(A) = \frac{150}{243}.
-	\]
-	
-	Vậy xác suất có ít nhất một hộp trống:
-	\[
-	1 - \frac{150}{243} = \frac{93}{243} = \frac{31}{81} \approx 0.38
-	\]
-	
-	\section*{Project 3: Generating Functions -- Đồ Án 3: Hàm Sinh}
-	
-	\textbf{Cho 1 ví dụ:}
-		Cho vô hạn số đồng xu có mệnh giá: 1, 2 và 5.  
-	Hỏi có bao nhiêu cách chọn các đồng xu (không giới hạn số lượng mỗi loại) để tổng tiền bằng 10?
-	
-	\subsection*{Hàm sinh của từng loại đồng xu:}
-	
-	\begin{itemize}
-		\item Với đồng xu 1: $1 + x + x^2 + x^3 + \cdots = \dfrac{1}{1 - x}$  
-		\item Với đồng xu 2: $1 + x^2 + x^4 + x^6 + \cdots = \dfrac{1}{1 - x^2}$
-		\item Với đồng xu 5: $1 + x^5 + x^{10} + x^{15} + \cdots = \dfrac{1}{1 - x^5}$
-	\end{itemize}
-	
-	\subsection*{Hàm sinh tổng hợp:}
-	
-	Hàm sinh đếm số cách chọn các đồng xu để tổng là $n$:
-	\[
-	G(x) = \frac{1}{(1 - x)(1 - x^2)(1 - x^5)}
-	\]
-	
-	Ta cần tìm hệ số của $x^{10}$ trong khai triển của $G(x)$:
-	\[
-	[x^{10}]\,G(x) = ?
-	\]
-	
-	Với $[x^{10}]$:
-	
-	Ta sẽ đếm số cách chọn bộ số \((a, b, c)\) nguyên không âm sao cho:
-	\[
-	a + 2b + 5c = 10.
-	\]
-	
-	\noindent\textbf{Trường hợp \(c = 0\):} \(a + 2b = 10\)
-	
-	\begin{itemize}[leftmargin=1.5cm]
-		\item \(b = 0 \Rightarrow a = 10\)
-		\item \(b = 1 \Rightarrow a = 8\)
-		\item \(b = 2 \Rightarrow a = 6\)
-		\item \(b = 3 \Rightarrow a = 4\)
-		\item \(b = 4 \Rightarrow a = 2\)
-		\item \(b = 5 \Rightarrow a = 0\)
-	\end{itemize}
-	Có \textbf{6 cách}.
-	
-	\noindent\textbf{Trường hợp \(c = 1\):} \(a + 2b = 5\)
-	
-	\begin{itemize}[leftmargin=1.5cm]
-		\item \(b = 0 \Rightarrow a = 5\)
-		\item \(b = 1 \Rightarrow a = 3\)
-		\item \(b = 2 \Rightarrow a = 1\)
-	\end{itemize}
-	Có \textbf{3 cách}.
-	
-	\noindent\textbf{Trường hợp \(c = 2\):} \(a + 2b = 0\) \\
-	Chỉ có 1 nghiệm: \(a = 0, b = 0\)
-	
-	\subsection*{3.2. Tổng số cách}
-	
-	Tổng cộng có:
-	\[
-	6 + 3 + 1 = \boxed{10} \text{ cách}.
-	\]
-	
-	$\Rightarrow [x^{10}]\,G(x) = 10.$
-	
 	\section*{Project: Integer Partition -- Đồ Án: Phân Hoạch Số Nguyên}
 	
 	\subsection*{\underline{Bài toán 1:} Ferrers \& Ferrers transpose diagrams -- Biểu đồ Ferrers \& biểu đồ Ferrers chuyển vị}
@@ -504,4 +325,323 @@
 	\boxed{64}
 	\]
 	
+	\subsubsection*{1.4 Extend the adjacency matrix graph representation by replacing those operations having an edge as argument or giving an edge or a list of edges as result, by corresponding operations having as argument or giving as result the source and target vertices of the edge or edges: $G.del_edge(v,w)$, $G.edges()$, $G.incoming(v)$, $G.outgoing(v)$, $G.source(v,w)$, and $G.target(v,w)$.}
+	
+	\begin{itemize}
+		\item \textbf{\texttt{G.del\_edge(v, w)}}: Xóa cạnh từ đỉnh $v$ đến đỉnh $w$.
+		
+		\begin{itemize}
+			\item Với ma trận kề $A$, thực hiện: 
+			\[
+			A[v][w] \gets 0
+			\]
+		\end{itemize}
+		
+		\item \textbf{\texttt{G.edges()}}: Trả về danh sách các cặp đỉnh $(v, w)$ sao cho tồn tại cạnh từ $v$ đến $w$.
+		
+		\begin{itemize}
+			\item Duyệt toàn bộ ma trận kề $A$, với mỗi $v,w$ thỏa:
+			\[
+			A[v][w] \ne 0 \Rightarrow \text{thêm } (v, w) \text{ vào danh sách}
+			\]
+		\end{itemize}
+		
+		\item \textbf{\texttt{G.incoming(v)}}: Trả về danh sách các đỉnh $u$ sao cho tồn tại cạnh từ $u$ đến $v$.
+		
+		\begin{itemize}
+			\item Duyệt cột $v$ trong ma trận kề $A$:
+			\[
+			A[u][v] \ne 0 \Rightarrow u \in \text{incoming}(v)
+			\]
+		\end{itemize}
+		
+		\item \textbf{\texttt{G.outgoing(v)}}: Trả về danh sách các đỉnh $w$ sao cho tồn tại cạnh từ $v$ đến $w$.
+		
+		\begin{itemize}
+			\item Duyệt hàng $v$ trong ma trận kề $A$:
+			\[
+			A[v][w] \ne 0 \Rightarrow w \in \text{outgoing}(v)
+			\]
+		\end{itemize}
+		
+		\item \textbf{\texttt{G.source(v, w)}}: Trả về đỉnh đầu của cạnh nối từ $v$ đến $w$ (nếu cạnh tồn tại).
+		
+		\begin{itemize}
+			\item Nếu $A[v][w] \ne 0$, thì:
+			\[
+			\text{return } v
+			\]
+		\end{itemize}
+		
+		\item \textbf{\texttt{G.target(v, w)}}: Trả về đỉnh cuối của cạnh nối từ $v$ đến $w$ (nếu cạnh tồn tại).
+		
+		\begin{itemize}
+			\item Nếu $A[v][w] \ne 0$, thì:
+			\[
+			\text{return } w
+			\]
+		\end{itemize}
+		
+	\end{itemize}
+	
+	\subsubsection*{1.5 Extend the first-child, next-sibling tree representation, in order to support the collection of basic operations but $T.root()$, $T.number_of_children(v)$,and $T.children(v)$ in $O(1)$ time.}
+	
+	Biểu diễn cây theo mô hình \textbf{con đầu tiên - anh em kế tiếp (first-child, next-sibling)} là một cách hiệu quả để biểu diễn cây đa phân nhánh (n-ary tree) bằng cấu trúc dữ liệu nhị phân. Trong mô hình này, mỗi nút chỉ giữ hai con trỏ: một trỏ đến người con đầu tiên của nó, và một trỏ đến người anh em kế tiếp trong danh sách các con.
+	
+	Tuy nhiên, với biểu diễn cơ bản này, một số thao tác thường gặp lại không thể thực hiện trong thời gian hằng số $O(1)$, chẳng hạn như:
+	
+	\begin{itemize}
+		\item \texttt{T.root()}: lấy nút gốc của cây.
+		\item \texttt{T.number\_of\_children(v)}: đếm số con trực tiếp của một nút $v$.
+		\item \texttt{T.children(v)}: truy xuất danh sách các con của nút $v$.
+	\end{itemize}
+	
+	Nguyên nhân là bởi vì để lấy danh sách con hoặc đếm số lượng con của một nút, ta cần duyệt qua chuỗi các nút thông qua con trỏ \texttt{next-sibling}, nên độ phức tạp thời gian là $O(k)$ với $k$ là số con.
+	
+	\vspace{0.5em}
+	
+	Để thực hiện các thao tác trên trong thời gian $O(1)$, ta có thể mở rộng cấu trúc của mỗi nút trong cây bằng cách bổ sung thêm thông tin phụ trợ:
+	
+	\begin{itemize}
+		\item \textbf{\texttt{num\_children}}: một biến nguyên lưu số lượng con trực tiếp của nút.
+		\item \textbf{\texttt{children\_list}} (tuỳ chọn): một danh sách (hoặc mảng) chứa con trỏ đến tất cả các con của nút, được cập nhật mỗi khi thêm hoặc xoá nút con.
+		\item \textbf{\texttt{parent}} (nếu cần): con trỏ đến nút cha, giúp thuận tiện cho việc truy xuất gốc hoặc duyệt ngược lên trên cây.
+	\end{itemize}
+	
+	Khi đó:
+	
+	\begin{itemize}
+		\item \texttt{T.root()}: có thể lưu con trỏ đến nút gốc ngay trong cấu trúc cây $\Rightarrow O(1)$.
+		\item \texttt{T.number\_of\_children(v)}: trả về giá trị \texttt{v.num\_children} $\Rightarrow O(1)$.
+		\item \texttt{T.children(v)}: truy xuất trực tiếp \texttt{v.children\_list} nếu tồn tại $\Rightarrow O(1)$.
+	\end{itemize}
+	
+	\vspace{0.5em}
+	Như vậy, với một chút mở rộng hợp lý trong cấu trúc của mỗi nút, ta hoàn toàn có thể giữ nguyên lợi ích biểu diễn đơn giản của mô hình \textit{first-child, next-sibling} mà vẫn đảm bảo hiệu năng cao cho các thao tác truy xuất thông dụng, đạt độ phức tạp thời gian $O(1)$.
+	
+	\subsubsection*{1.6 Show how to double check that the graph-based representation of a tree is indeed a tree, in time linear in the size of the tree.}
+	
+	Khi một cây được biểu diễn dưới dạng đồ thị có hướng (graph-based representation), đặc biệt là bằng danh sách cạnh hoặc danh sách kề, chúng ta cần một cách để kiểm tra xem cấu trúc đó có thực sự là một cây hay không. Ta cần thực hiện phép kiểm tra này trong thời gian tuyến tính theo kích thước của cây (số đỉnh và số cạnh).
+	
+	\vspace{1em}
+	Nếu một đồ thị có hướng là một cây nếu thỏa mãn đồng thời các điều kiện sau:
+	
+	\begin{enumerate}
+		\item Đồ thị có đúng $n$ đỉnh và $n-1$ cạnh.
+		\item Có đúng một nút gốc (root): chỉ có một đỉnh có bậc vào bằng $0$.
+		\item Mỗi đỉnh (trừ gốc) có đúng một nút cha: tức là mỗi đỉnh có bậc vào đúng bằng $1$.
+		\item Đồ thị không chứa chu trình và liên thông (mọi đỉnh đều được nối với gốc qua một chuỗi cạnh).
+	\end{enumerate}
+	
+	\vspace{1em}
+	
+	Giả sử đồ thị được biểu diễn bằng danh sách kề với $n$ đỉnh và $m$ cạnh.
+	
+	\begin{enumerate}
+		\item Kiểm tra số cạnh: Nếu $m \ne n - 1$, thì không thể là cây.
+		
+		\item Tính bậc vào (in-degree) của mỗi đỉnh:
+		\begin{itemize}
+			\item Duyệt qua tất cả các cạnh $(u, v)$, với mỗi cạnh ta tăng $in\_degree[v]$ thêm $1$.
+			\item Sau đó:
+			\begin{itemize}
+				\item Đếm số đỉnh có $in\_degree = 0$ (gốc): phải đúng 1 đỉnh.
+				\item Kiểm tra các đỉnh còn lại có $in\_degree = 1$.
+				\item Nếu không đúng, thì không phải cây.
+			\end{itemize}
+		\end{itemize}
+		
+		\item Kiểm tra liên thông và không có chu trình:
+		\begin{itemize}
+			\item Bắt đầu từ đỉnh gốc, thực hiện duyệt đồ thị (DFS hoặc BFS).
+			\item Trong quá trình duyệt:
+			\begin{itemize}
+				\item Nếu gặp lại một đỉnh đã thăm $\Rightarrow$ có chu trình $\Rightarrow$ không phải cây.
+				\item Sau khi duyệt xong, kiểm tra số lượng đỉnh đã thăm phải đúng bằng $n$ (tức là liên thông).
+			\end{itemize}
+		\end{itemize}
+	\end{enumerate}
+	
+	\vspace{1em}
+	\textbf{Độ phức tạp thời gian:} Mọi bước trong giải thuật đều chạy trong thời gian $O(n + m)$, mà với cây thì $m = n - 1$, do đó tổng thể là $O(n)$.
+	
+	\vspace{1em}
+	Như vậy, ta có thể kiểm tra một cách chắc chắn rằng một đồ thị có hướng có biểu diễn đúng là một cây hay không bằng các bước kiểm tra đơn giản về số cạnh, bậc vào, chu trình và liên thông, tất cả đều thực hiện được trong thời gian tuyến tính.
+	
+	\subsubsection*{ Exercise 1.3 Implement algorithms to generate the path graph $P_n$, the circle graph $C_n$, and the wheel graph Wn on n vertices, using the collection of 32 abstract operations from Sect.}
+	
+	\begin{itemize}
+		\item \textbf{Đồ thị đường đi $P_n$} là một chuỗi các đỉnh nối liên tiếp, tức là có $n$ đỉnh và $n - 1$ cạnh, với mỗi cặp đỉnh $v_i$ và $v_{i+1}$ được nối bằng một cạnh.
+		
+		\item \textbf{Đồ thị chu trình $C_n$} là một đồ thị đường đi $P_n$ được “đóng vòng”, nghĩa là thêm cạnh nối giữa đỉnh đầu tiên và đỉnh cuối cùng.
+		
+		\item \textbf{Đồ thị bánh xe $W_n$} được xây dựng từ đồ thị chu trình $C_{n-1}$ bằng cách thêm một đỉnh trung tâm (gọi là trục bánh xe) và nối nó với tất cả các đỉnh trên chu trình.
+	\end{itemize}
+	
+	Giả sử chúng ta có sẵn các phép toán trừu tượng như:
+	\begin{itemize}
+		\item \texttt{G.add\_vertex()}: thêm đỉnh mới và trả về định danh của đỉnh.
+		\item \texttt{G.add\_edge(u, v)}: thêm cạnh nối hai đỉnh $u$ và $v$.
+	\end{itemize}
+	
+	\textbf{Với thuật toán sinh $P_n$:}
+	\begin{enumerate}
+		\item Khởi tạo đồ thị rỗng $G$.
+		\item Thêm $n$ đỉnh: $v_0, v_1, \ldots, v_{n-1}$.
+		\item Với mỗi $i$ từ $0$ đến $n-2$, thêm cạnh từ $v_i$ đến $v_{i+1}$.
+	\end{enumerate}
+	
+	\textbf{Với thuật toán sinh $C_n$:}
+	\begin{itemize}
+		\item Thực hiện giống như $P_n$.
+		\item Thêm cạnh từ $v_{n-1}$ đến $v_0$ để tạo chu trình.
+	\end{itemize}
+	
+	\textbf{Với thuật toán sinh $W_n$:}
+	\begin{enumerate}
+		\item Tạo chu trình $C_{n-1}$ gồm các đỉnh $v_0, \ldots, v_{n-2}$.
+		\item Thêm đỉnh trung tâm $c$.
+		\item Với mỗi đỉnh $v_i$ trên chu trình, thêm cạnh giữa $c$ và $v_i$.
+	\end{enumerate}
+	
+	Như vậy, bằng cách sử dụng các thao tác trừu tượng như thêm đỉnh và thêm cạnh, ta có thể xây dựng ba loại đồ thị $P_n$, $C_n$, và $W_n$ một cách tuần tự, đơn giản và rõ ràng, với chi phí thời gian tuyến tính theo số đỉnh.
+	
+	\subsubsection*{Exercise 1.4 Implement an algorithm to generate the complete graph $K_n$ on $n$ vertices and the complete bipartite graph $K_{p,q}$ with $p$ + $q$ vertices, using the collection of 32 abstract operations from Sect.}
+	
+	\begin{itemize}
+		\item Với đồ thị đầy đủ \(K_n\), ta:
+		\begin{enumerate}
+			\item Tạo \(n\) đỉnh bằng các lệnh \texttt{G.add\_vertex()}.
+			\item Duyệt qua tất cả các cặp \((i, j)\) với \(i \ne j\), rồi thêm cạnh nối giữa chúng bằng \texttt{G.add\_edge(i, j)}.
+		\end{enumerate}
+		
+		\item Với đồ thị hai phía đầy đủ \(K_{p,q}\), ta:
+		\begin{enumerate}
+			\item Tạo \(p+q\) đỉnh: \(p\) đỉnh cho tập trái \(U\), và \(q\) đỉnh cho tập phải \(V\).
+			\item Duyệt tất cả các cặp \((u, v)\) với \(u \in U, v \in V\), rồi thêm cạnh nối giữa \(u\) và \(v\).
+		\end{enumerate}
+	\end{itemize}
+	
+	Độ phức tạp thời gian:
+	
+	\begin{itemize}
+		\item Với \(K_n\): \(\mathcal{O}(n^2)\) do cần duyệt tất cả cặp đỉnh.
+		\item Với \(K_{p,q}\): \(\mathcal{O}(pq)\) vì có đúng \(pq\) cạnh cần thêm.
+	\end{itemize}
+
+	\subsubsection*{Exercise 1.5 Implement the extended adjacency matrix graph representation given in Problem 1.4, wrapped in a Python class, using Python lists together with the internal numbering of the vertices}
+	
+	Ý tưởng:
+	
+	Ta xây dựng một lớp \texttt{Graph} với các đặc điểm sau:
+	
+	\begin{itemize}
+		\item Sử dụng ma trận kề dạng danh sách 2 chiều (list of lists) để lưu các cạnh. 
+		\item Với đồ thị có $n$ đỉnh, ma trận kề là ma trận $n \times n$, phần tử tại vị trí $(i, j)$ có giá trị \texttt{True} nếu có cạnh từ đỉnh $i$ đến đỉnh $j$.
+		\item Dựa vào ý tưởng đó, ta có thể có các thao tác sau:
+		\begin{enumerate}
+			\item \texttt{add\_edge(v, w)}: thêm cạnh từ $v$ đến $w$
+			\item \texttt{del\_edge(v, w)}: xoá cạnh từ $v$ đến $w$
+			\item \texttt{edges()}: trả về danh sách các cạnh dưới dạng cặp $(v, w)$
+			\item \texttt{incoming(v)}: trả về danh sách các đỉnh $u$ sao cho có cạnh từ $u \to v$
+			\item \texttt{outgoing(v)}: trả về danh sách các đỉnh $w$ sao cho có cạnh từ $v \to w$
+			\item \texttt{source(v, w)}: trả về đỉnh nguồn của cạnh $(v, w)$ nếu tồn tại
+			\item \texttt{target(v, w)}: trả về đỉnh đích của cạnh $(v, w)$ nếu tồn tại
+		\end{enumerate}
+	\end{itemize}
+	
+	\subsubsection*{Exercise 1.6 Enumerate all perfect matchings in the complete bipartite graph $K_{p,q}$ on $p$ + $q$ vertices.}
+	
+	\begin{itemize}
+		\item Đồ thị $K_{p,q}$ gồm hai tập đỉnh $U$ và $V$ với:
+		\begin{itemize}
+			\item $|U| = p$, $|V| = q$
+			\item Mỗi đỉnh trong $U$ nối với mọi đỉnh trong $V$
+		\end{itemize}
+		\item Ghép cặp hoàn hảo (perfect matching) là tập các cạnh sao cho:
+		\begin{itemize}
+			\item Mỗi đỉnh chỉ thuộc đúng một cạnh
+			\item Tức là toàn bộ các đỉnh được ghép đôi hoàn toàn giữa hai tập
+		\end{itemize}
+		\item Điều kiện cần: \textbf{phải có $p = q$}, nếu không sẽ không thể có ghép cặp hoàn hảo.
+	\end{itemize}
+	
+	Ta tìm số lượng ghép cặp hoàn hảo như sau:
+	
+	Với $p = q = n$, số ghép cặp hoàn hảo trong $K_{n,n}$ chính là số hoán vị của $n$ phần tử:
+	\[
+	\text{Số lượng} = n!
+	\]
+	Mỗi hoán vị tương ứng với một cách ghép từng đỉnh $u_i \in U$ với một đỉnh $v_{\sigma(i)} \in V$.
+	
+	\subsubsection*{Exercise 1.7 Implement an algorithm to generate the complete binary tree with $n$ nodes, using the collection of 13 abstract operations from Sect.}
+	
+	Bài toán yêu cầu xây dựng cây nhị phân đầy đủ với đúng $n$ nút, sử dụng bộ 13 phép toán trừu tượng được đề cập trong Mục 1.3. Một cây nhị phân đầy đủ (complete binary tree) là cây trong đó các mức, ngoại trừ mức cuối cùng, đều được điền đầy đủ; các nút ở mức cuối nằm càng bên trái càng tốt.
+	
+	\begin{itemize}
+		\item Bắt đầu bằng cách tạo nút gốc (root).
+		\item Sử dụng một hàng đợi để duyệt các nút theo thứ tự mức (level-order traversal).
+		\item Với mỗi nút trong hàng đợi, lần lượt chèn nút con trái và nút con phải (nếu tổng số nút chưa đạt $n$).
+		\item Dừng lại khi đã tạo đủ $n$ nút.
+	\end{itemize}
+	
+	Ta có thể mô phỏng trừu tượng như sau:
+	
+	\begin{enumerate}
+		\item Gọi \texttt{T.Create()} để tạo cây rỗng.
+		\item Gọi \texttt{r = T.AddRoot()} để thêm nút gốc, tăng số lượng nút hiện tại lên 1.
+		\item Khởi tạo hàng đợi \texttt{Q} và thêm nút gốc \texttt{r} vào hàng đợi.
+		\item Trong khi số nút hiện tại nhỏ hơn $n$, thực hiện:
+		\begin{itemize}
+			\item Lấy nút \texttt{v} từ hàng đợi (\texttt{v = Q.pop()}).
+			\item Nếu tổng số nút chưa đủ $n$, chèn nút trái: \texttt{l = T.AddLeft(v)}, thêm \texttt{l} vào hàng đợi.
+			\item Nếu tổng số nút chưa đủ $n$, chèn nút phải: \texttt{r = T.AddRight(v)}, thêm \texttt{r} vào hàng đợi.
+		\end{itemize}
+	\end{enumerate}
+	
+	\subsubsection*{Exercise 1.8 Implement an algorithm to generate random trees with $n$ nodes, using the collection of 13 abstract operations from Sect. 1.3. Give the time and space complexity of the algorithm}
+	
+	Ta sẽ sinh tuần tự $n$ nút bằng các phép toán trừu tượng, và liên kết chúng lại thành một cây bằng cách chọn ngẫu nhiên cha cho từng nút mới sinh. Thuật toán thực hiện như sau:
+	
+	\begin{itemize}
+		\item Bước 1: Khởi tạo nút gốc $r \leftarrow \texttt{makeNode()}$.
+		\item Bước 2: Khởi tạo danh sách các nút đã có: $V \leftarrow [r]$.
+		\item Bước 3: Với mỗi $i$ từ $2$ đến $n$:
+		\begin{itemize}
+			\item Sinh nút mới: $u \leftarrow \texttt{makeNode()}$
+			\item Chọn ngẫu nhiên một nút $v \in V$
+			\item Gắn $u$ làm con của $v$: $\texttt{addChild}(v, u)$
+			\item Thêm $u$ vào $V$
+		\end{itemize}
+	\end{itemize}
+	
+	\subsubsection*{Exercise 1.9 Give an implementation of operation $T.previous\_sibling(v)$ using the array-of-parents tree representation.}
+	
+	Ta cần thao tác previous\_sibling(v) để tìm đỉnh anh/chị em nằm bên trái (trước) của đỉnh $v$ trên cây.
+	
+	\begin{itemize}
+		\item Gọi $p = P[v]$ là cha của đỉnh $v$.
+		\item Duyệt qua tất cả các đỉnh $u$ từ $1$ đến $v-1$:
+		\begin{itemize}
+			\item Nếu $P[u] = p$ thì $u$ là anh/chị em của $v$ và đứng trước $v$.
+			\item Ghi nhận giá trị $u$ lớn nhất thỏa điều kiện này.
+		\end{itemize}
+		\item Kết quả là $u$ lớn nhất nhỏ hơn $v$ có cùng cha với $v$.
+	\end{itemize}
+	
+	\subsubsection*{ Exercise 1.10 Implement the extended first-child,next-sibling tree representation of Problem 1.5, wrapped in a Python class, using Python lists together with the internal numbering of the nodes}
+	
+	Để đạt được thời gian O(1) cho các thao tác trên, ta mở rộng cấu trúc dữ liệu như sau:
+	
+	\begin{itemize}
+		\item Với mỗi nút \(v\), lưu:
+		\begin{itemize}
+			\item \texttt{first\_child[v]}: con đầu tiên của \(v\)
+			\item \texttt{next\_sibling[v]}: anh em kế tiếp của \(v\)
+			\item \texttt{parent[v]}: cha của \(v\)
+			\item \texttt{num\_children[v]}: số con của \(v\) (cập nhật khi thêm con)
+			\item \texttt{children\_list[v]}: danh sách con của \(v\) để truy cập O(1)
+		\end{itemize}
+		\item Duy trì \texttt{root}: đỉnh gốc
+	\end{itemize}
 \end{document}
