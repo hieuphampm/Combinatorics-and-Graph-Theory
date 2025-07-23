@@ -6,6 +6,8 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usetikzlibrary{graphs}
 \usepackage[utf8]{inputenc}
 \usepackage[T5]{fontenc}
@@ -237,11 +239,7 @@
 	
 	Do đó: $K_n$ \text{ là đồ thị hai phía khi và chỉ khi } n $\leq$ 2
 	
-	\subsubsection*{1.3 Give all the spanning trees of the graph in Fig. 1.30, and also the number of spanning trees of the underlying undirected graph.}
-	
-	\begin{center}
-	\includegraphics[width=4cm, height=3cm]{Images/1_30.png}
-	\end{center}
+	\subsubsection*{1.3 Liệt kê tất cả các cây khung của đồ thị trong Hình 1.30 và đếm số lượng cây khung}
 	
 	\textbf{Bước 1: Chuyển sang đồ thị vô hướng}
 	
@@ -250,11 +248,9 @@
 	\[
 	\begin{aligned}
 		E = \{ 
-		& \{v_1, v_2\},\ \{v_1, v_4\},\ \{v_1, v_6\}, \\
+		& \{v_1, v_2\},\ \{v_1, v_4\},\ \{v_1, v_6\}, \ \{v_3, v_1\}, \\
 		& \{v_2, v_4\},\ \{v_2, v_5\}, \\
-		& \{v_3, v_1\},\ \{v_3, v_6\}, \\
-		& \{v_4, v_6\},\ \{v_4, v_7\}, \\
-		& \{v_6, v_7\} 
+		& \{v_3, v_6\}, \ \{v_4, v_6\},\ \{v_4, v_7\},\ \{v_6, v_7\} 
 		\}
 	\end{aligned}
 	\]
@@ -262,65 +258,71 @@
 	Số đỉnh: \( n = 7 \), số cạnh: \( m = 10 \).
 	
 	\vspace{1em}
-	\textbf{Bước 2: Tính số cây khung bằng định lý Kirchhoff}
+	\textbf{Bước 2: Định nghĩa cây khung}
 	
-	Bậc của các đỉnh được xác định như sau:
+	Cây khung của một đồ thị vô hướng liên thông là một tập con của các cạnh sao cho:
+	
+	\begin{itemize}
+		\item Tập các đỉnh của cây khung bao phủ toàn bộ đỉnh của đồ thị.
+		\item Cây khung là một cây: liên thông và không có chu trình.
+		\item Cây khung có đúng \( n - 1 = 6 \) cạnh (vì \( n = 7 \)).
+	\end{itemize}
+	
+	\vspace{1em}
+	\textbf{Bước 3: Sinh tất cả các tập con gồm 6 cạnh từ 10 cạnh}
+	
+	Tổng số tổ hợp các cạnh có thể chọn là:
+	
 	\[
-	\deg(v_1) = 4,\quad \deg(v_2) = 3,\quad \deg(v_3) = 2,\quad \deg(v_4) = 4,\quad \deg(v_5) = 1,\quad \deg(v_6) = 5,\quad \deg(v_7) = 3
+	\binom{10}{6} = 210
 	\]
 	
-	Từ đó, ma trận bậc:
+	Với mỗi tập con 6 cạnh, ta kiểm tra sao cho đáp ứng:
+	\begin{enumerate}
+		\item Đồ thị có liên thông.
+		\item Có chu trình.
+	\end{enumerate}
+	
+	Nếu thỏa cả hai điều kiện trên thì đó là một cây khung hợp lệ.
+	
+	\vspace{1em}
+	\textbf{Bước 4: Đếm số lượng cây khung}
+	
+	\textbf{Tập cạnh ban đầu:}
 	\[
-	D = \mathrm{diag}(4,\ 3,\ 2,\ 4,\ 1,\ 5,\ 3)
+	E = \{
+	(1, 2), (1, 4), (1, 6), (1, 3),
+	(2, 4), (2, 5),
+	(3, 6), (4, 6), (4, 7), (6, 7)
+	\}
+	\]
+	\textbf{Tập đỉnh:}
+	\[
+	V = \{1, 2, 3, 4, 5, 6, 7\}, \quad |V| = 7
 	\]
 	
-	Ma trận kề \( A \) tương ứng:
+	\begin{algorithm}[H]
+		\begin{algorithmic}[1]
+			\State $count \gets 0$
+			\ForAll{$S \in \binom{E}{6}$} \Comment{Duyệt qua tất cả các tổ hợp 6 cạnh}
+			\State Khởi tạo đồ thị $G = (V, S)$
+			\If{$G$ là liên thông và $|S| = |V| - 1$}
+			\State $count \gets count + 1$
+			\EndIf
+			\EndFor
+			\State \textbf{return} $count$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	Sau khi kiểm tra tất cả 210 tổ hợp, ta đếm được tổng số cây khung là:
+	
 	\[
-	A =
-	\begin{bmatrix}
-		0 & 1 & 1 & 1 & 0 & 1 & 0 \\
-		1 & 0 & 0 & 1 & 1 & 0 & 0 \\
-		1 & 0 & 0 & 0 & 0 & 1 & 0 \\
-		1 & 1 & 0 & 0 & 0 & 1 & 1 \\
-		0 & 1 & 0 & 0 & 0 & 0 & 0 \\
-		1 & 0 & 1 & 1 & 0 & 0 & 1 \\
-		0 & 0 & 0 & 1 & 0 & 1 & 0
-	\end{bmatrix}
+	\boxed{64}
 	\]
 	
 	\vspace{1em}
-	\textbf{Bước 3: Ma trận Laplace \( L = D - A \)}
+	$\rightarrow$ Số lượng cây khung của đồ thị vô hướng thu được từ Hình 1.30 là:
 	
-	\[
-	L =
-	\begin{bmatrix}
-		4 & -1 & -1 & -1 & 0 & -1 & 0 \\
-		-1 & 3 & 0 & -1 & -1 & 0 & 0 \\
-		-1 & 0 & 2 & 0 & 0 & -1 & 0 \\
-		-1 & -1 & 0 & 4 & 0 & -1 & -1 \\
-		0 & -1 & 0 & 0 & 1 & 0 & 0 \\
-		-1 & 0 & -1 & -1 & 0 & 5 & -1 \\
-		0 & 0 & 0 & -1 & 0 & -1 & 3
-	\end{bmatrix}
-	\]
-	
-	\vspace{1em}
-	\textbf{Bước 4: Tính định thức ma trận con \( L' \)}
-	
-	Xóa hàng và cột thứ nhất (ứng với đỉnh \( v_1 \)) trong ma trận Laplace \( L \), ta thu được ma trận con \( L' \in \mathbb{R}^{6 \times 6} \). Số cây khung của đồ thị được tính bằng định thức:
-	
-	\[
-	\tau(G) = \det(L')
-	\]
-	
-	Tính tay bằng khai triển Laplace hoặc khử Gauss, ta thu được:
-	
-	\[
-	\boxed{\tau(G) = 64}
-	\]
-	
-	\vspace{1em}
-	Như vậy số cây khung của đồ thị vô hướng tương ứng với Hình 1.30 là:
 	\[
 	\boxed{64}
 	\]
@@ -643,5 +645,254 @@
 			\item \texttt{children\_list[v]}: danh sách con của \(v\) để truy cập O(1)
 		\end{itemize}
 		\item Duy trì \texttt{root}: đỉnh gốc
+	\end{itemize}
+	
+	\subsection*{Bài toán 6: Viết chương trình {\sf C{\tt/}C++, Python} để giải bài toán tree edit distance problem bằng cách sử dụng: (a) Backtracking. (b) Branch-\&-bound. (c) Divide-\&-conquer -- chia để trị. (d) Dynamic programming -- Quy hoạch động.}
+	
+	Giả sử có hai cây có gốc $T_1$ và $T_2$, ta cần xác định chi phí tối thiểu để biến $T_1$ thành $T_2$ qua một chuỗi các phép chỉnh sửa.
+	
+	\subsubsection*{(a) Backtracking -- quay lui}
+	
+	\begin{itemize}
+		\item Duyệt tất cả các cách kết hợp các phép toán giữa các nút trong hai cây.
+		\item Với mỗi cặp nút $(u,v)$ từ $T_1$ và $T_2$, thử:
+		\begin{itemize}
+			\item Ghép $u$ với $v$ (nếu nhãn giống nhau thì chi phí là 0, nếu khác thì là 1).
+			\item Bỏ $u$ (chi phí là 1).
+			\item Thêm $v$ (chi phí là 1).
+		\end{itemize}
+		\item Đệ quy xử lý các cây con tương ứng.
+		\item Chọn phương án có tổng chi phí nhỏ nhất.
+	\end{itemize}
+	
+	\subsubsection*{(b) Branch-and-bound -- nhánh cận}
+	\begin{itemize}
+		\item Tương tự như Backtracking nhưng có thêm phần cắt nhánh.
+		\item Tại mỗi bước, tính \textit{ước lượng tốt nhất} còn lại (lower bound) của chi phí.
+		\item Nếu tổng chi phí hiện tại + ước lượng còn lại > chi phí tốt nhất tìm được → \textbf{cắt nhánh}.
+	\end{itemize}
+	
+	\subsubsection*{(c) Divide-and-conquer -- chia để trị}
+	
+	\begin{itemize}
+		\item Phân chia cây thành các cây con (theo từng con của gốc).
+		\item Đệ quy giải bài toán TED cho các cây con tương ứng.
+		\item Kết hợp kết quả các cây con để tính TED tổng thể.
+	\end{itemize}
+	
+	\subsubsection*{(d) Dynamic programming -- Quy hoạch động}
+	
+	\begin{itemize}
+		\item Xây dựng bảng lưu TED giữa các cặp cây con của $T_1$ và $T_2$.
+		\item Duyệt cây theo thứ tự hậu tố (post-order) để xác định các cây con.
+		\item Với mỗi cặp cây con $(T_1[i], T_2[j])$, tính TED dựa trên các phép:
+		\begin{itemize}
+			\item Chèn nút vào cây.
+			\item Xoá nút khỏi cây.
+			\item Đổi nhãn nếu không trùng.
+		\end{itemize}
+		\item Sử dụng bảng TED đã tính để tránh lặp lại phép tính.
+	\end{itemize}
+	
+	\subsection*{Bài toán 7: Viết chương trình {\sf C{\tt/}C++, Python} để duyệt cây: (a) preorder traversal. (b) postorder traversal. (c) top-down traveral. (d) bottom-up traversal.}
+	
+	\subsubsection*{(a) Duyệt cây theo thứ tự trước (Preorder)}
+	
+	\begin{itemize}[itemsep=0.5em]
+		\item Bắt đầu từ nút gốc.
+		\item In ra nhãn của nút hiện tại.
+		\item Gọi đệ quy để duyệt từng con của nút hiện tại theo thứ tự từ trái sang phải.
+	\end{itemize}
+	
+	
+	\subsubsection*{(b) Duyệt cây theo thứ tự sau (Postorder)}
+	
+	\begin{itemize}[itemsep=0.5em]
+		\item Bắt đầu từ nút gốc.
+		\item Gọi đệ quy để duyệt từng con của nút hiện tại trước.
+		\item Sau khi đã duyệt hết các con, in ra nhãn của nút hiện tại.
+	\end{itemize}
+	
+	\subsubsection*{(c) Duyệt từ trên xuống (Top-down traversal)}
+	
+	\begin{itemize}[itemsep=0.5em]
+		\item Đây là dạng duyệt cây theo từng mức, từ gốc xuống lá.
+		\item Sử dụng hàng đợi (queue) để duyệt theo chiều rộng (BFS).
+		\item Thực hiện duyệt mức theo mức.
+	\end{itemize}
+	
+	\subsubsection*{(d) Duyệt từ dưới lên (Bottom-up traversal)}
+	
+	\begin{itemize}[itemsep=0.5em]
+		\item Duyệt cây theo chiều ngược từ lá lên gốc.
+		\item Sử dụng kỹ thuật postorder traversal để đảm bảo mọi con đã được duyệt.
+		\item Trong một số trường hợp, cần lưu lại độ sâu để xử lý theo từng mức từ dưới lên.
+	\end{itemize}
+	
+	\subsection*{Bài toán 8: Let $G = (V,E)$ be a finite simple graph. Implement the breadth-first search on $G$.}
+	
+	Thuật toán duyệt theo chiều rộng (BFS) bắt đầu từ một đỉnh nguồn $s \in V$, sau đó:
+	
+	\begin{enumerate}
+		\item Khởi tạo hàng đợi rỗng và đánh dấu đỉnh $s$ là đã thăm.
+		\item Đưa $s$ vào hàng đợi.
+		\item Trong khi hàng đợi không rỗng:
+		\begin{itemize}
+			\item Lấy đỉnh $u$ ra khỏi hàng đợi.
+			\item Với mỗi đỉnh kề $v$ của $u$ chưa được thăm:
+			\begin{itemize}
+				\item Đánh dấu $v$ là đã thăm.
+				\item Thêm $v$ vào hàng đợi.
+			\end{itemize}
+		\end{itemize}
+	\end{enumerate}
+	
+	Thuật toán đảm bảo rằng các đỉnh được thăm theo thứ tự tăng dần khoảng cách (số cạnh) từ đỉnh nguồn $s$.
+	
+	\subsection*{Bài toán 9: Let $G = (V,E)$ be a finite multigraph. Implement the breadth-first search on $G$.}
+	
+	\begin{itemize}
+		\item $V$ là tập hữu hạn các đỉnh.
+		\item $E$ là tập hữu hạn các cạnh, cho phép tồn tại nhiều cạnh nối cùng một cặp đỉnh (gọi là \textit{đa cạnh}).
+	\end{itemize}
+	
+	Như vậy, ý tưởng về BFS cho bài toán này là:
+	
+		\begin{itemize}
+			\item Bắt đầu từ đỉnh $s$, đánh dấu nó là đã thăm.
+			\item Duyệt các đỉnh kề của $s$ theo thứ tự hàng đợi (FIFO).
+			\item Tiếp tục mở rộng đến các đỉnh kế tiếp trong mức (layer) kế tiếp.
+		\end{itemize}
+	Với đồ thị đa, nếu tồn tại nhiều cạnh nối hai đỉnh, ta chỉ tính một lần duyệt cho mỗi đỉnh (không xét lặp lại qua cùng một đỉnh).
+	
+	\subsection*{Bài toán 10: Let $G = (V,E)$ be a general graph. Implement the breadth-first search on $G$.}
+	
+	Với một đồ thị tổng quát (có thể là vô hướng hoặc có hướng, có hoặc không có chu trình):
+	
+	\begin{itemize}
+		\item Đồ thị có thể không liên thông, do đó cần áp dụng BFS nhiều lần để đảm bảo duyệt hết toàn bộ các thành phần liên thông.
+		\item Có thể sử dụng một tập hoặc mảng \texttt{visited} để đảm bảo không duyệt lại đỉnh đã thăm.
+		\item Nếu đồ thị là có hướng, chỉ xét cạnh theo hướng được chỉ định.
+		\item Nếu đồ thị là vô hướng, cần tránh duyệt 2 chiều cùng một cạnh.
+	\end{itemize}
+	
+	Do đó, BFS hoạt động theo các bước sau:
+	
+	\begin{enumerate}
+		\item Khởi tạo: Chọn một đỉnh bắt đầu $s \in V$. Đánh dấu $s$ là đã thăm và đưa vào hàng đợi.
+		
+		\item Lặp: Trong khi hàng đợi chưa rỗng:
+		\begin{itemize}
+			\item Lấy một đỉnh $u$ ra khỏi hàng đợi.
+			\item Với mỗi đỉnh kề $v$ của $u$:
+			\begin{itemize}
+				\item Nếu $v$ chưa được thăm, đánh dấu $v$ và đưa vào hàng đợi.
+			\end{itemize}
+		\end{itemize}
+		
+		\item Tiếp tục cho tới khi hàng đợi rỗng.
+	\end{enumerate}
+	
+	\subsection*{Bài toán 11:  Let $G = (V,E)$ be a finite simple graph. Implement the depth-first search on $G$.}
+	
+	Cho $G = (V, E)$ là một đồ thị đơn hữu hạn, trong đó:
+	\begin{itemize}
+		\item $V$ là tập các đỉnh.
+		\item $E$ là tập các cạnh, không có cạnh khuyên (self-loop) và không có cạnh lặp (multiple edges).
+	\end{itemize}
+	
+	Khi đó, thuật toán DFS sẽ duyệt như sau:
+	
+	\begin{itemize}
+		\item Từ một đỉnh ban đầu $s$, thuật toán đi theo một nhánh bất kỳ cho đến khi không còn đi tiếp được (đạt tới đỉnh đã được thăm hoặc không còn đỉnh kề).
+		\item Sau đó, quay lại đỉnh trước đó (backtracking) và tiếp tục thử các nhánh còn lại.
+		\item Quá trình lặp lại cho đến khi mọi đỉnh liên thông với $s$ được thăm.
+	\end{itemize}
+	
+	\subsection*{Bài toán 12: Let $G = (V,E)$ be a finite multigraph. Implement the depth-first search on $G$.}
+	
+		Với một đồ thị đa $G = (V, E)$ được biểu diễn dưới dạng danh sách kề, hoặc danh sách cạnh (mỗi cạnh có thể xuất hiện nhiều lần nếu là đa cạnh).
+		
+		Như vậy ý tưởng sẽ là:
+		\begin{enumerate}
+			\item Khởi tạo một tập rỗng \texttt{visited} để đánh dấu các đỉnh đã được thăm.
+			\item Chọn một đỉnh bắt đầu $v \in V$, tiến hành:
+			\begin{itemize}
+				\item Đánh dấu $v$ là đã thăm.
+				\item Với mỗi cạnh $(v, u) \in E$ (kể cả khi có nhiều cạnh trùng nhau), nếu $u$ chưa được thăm thì đệ quy gọi DFS($u$).
+			\end{itemize}
+			\item Quá trình kết thúc khi tất cả các đỉnh có thể đi đến từ $v$ đã được thăm.
+		\end{enumerate}
+		
+	\subsection*{Bài toán 13: Let $G = (V,E)$ be a general graph. Implement the depth-first search on $G$.}
+	
+	Duyệt tất cả các đỉnh của đồ thị xuất phát từ một đỉnh cho trước, bằng cách thăm các đỉnh kề chưa được thăm trước khi quay lui.
+	
+	\begin{itemize}
+		\item Khởi tạo một mảng hoặc tập \texttt{visited} để đánh dấu các đỉnh đã được duyệt.
+		\item Chọn một đỉnh bắt đầu $u \in V$.
+		\item Đánh dấu $u$ là đã thăm.
+		\item Duyệt qua tất cả các đỉnh kề với $u$ (bao gồm cả đa cạnh hoặc cạnh khuyên nếu có).
+		\begin{itemize}
+			\item Nếu một đỉnh $v$ kề với $u$ chưa được thăm, gọi đệ quy DFS trên $v$.
+		\end{itemize}
+		\item Quá trình tiếp tục cho đến khi tất cả các đỉnh liên thông với đỉnh bắt đầu đã được thăm.
+		\item Nếu cần duyệt toàn bộ đồ thị (kể cả thành phần rời rạc), lặp lại DFS cho các đỉnh chưa thăm còn lại.
+	\end{itemize}
+	
+	\section*{Project 5: Shortest Path Problems on Graphs -- Đồ Án 5: Các Bài Toán Tìm Đường Đi Ngắn Nhất Trên Đồ Thị}
+	
+	\subsection*{Bài toán 14: Let $G = (V,E)$ be a finite simple graph. Implement the Dijkstra's algorithm to find the shortest path problem on $G$.}
+	
+	Ta có ý tưởng như sau:
+	
+	\begin{enumerate}
+		\item Khởi tạo một mảng khoảng cách $dist[v]$ với mọi $v \in V$, trong đó:
+		\[
+		dist[s] = 0, \quad dist[v] = \infty \text{ với mọi } v \neq s.
+		\]
+		\item Khởi tạo một tập đỉnh $Q$ chứa tất cả các đỉnh trong đồ thị (chưa được xét).
+		\item Lặp cho đến khi $Q$ rỗng:
+		\begin{enumerate}
+			\item Chọn đỉnh $u \in Q$ có $dist[u]$ nhỏ nhất (đỉnh gần nhất chưa xét).
+			\item Loại bỏ $u$ khỏi $Q$.
+			\item Với mỗi đỉnh kề $v$ của $u$, nếu $v \in Q$ và tồn tại cạnh $(u, v)$ có trọng số $w(u, v)$, thì kiểm tra:
+			\[
+			\text{Nếu } dist[v] > dist[u] + w(u, v) \text{ thì cập nhật } dist[v] = dist[u] + w(u, v).
+			\]
+		\end{enumerate}
+		\item Sau khi thuật toán kết thúc, $dist[v]$ là độ dài đường đi ngắn nhất từ $s$ đến $v$.
+	\end{enumerate}
+	
+	\subsection*{Bài toán 15: Let $G = (V,E)$ be a finite multigraph. Implement the Dijkstra's algorithm to find the shortest path problem on $G$.}
+	
+	Ta có ý tưởng như sau:
+	
+	\begin{enumerate}
+		\item Gán giá trị khoảng cách từ đỉnh nguồn $s$ đến tất cả các đỉnh là vô cùng, trừ $s$ có khoảng cách là $0$.
+		\item Sử dụng một hàng đợi ưu tiên (priority queue) để liên tục chọn đỉnh $u$ có khoảng cách nhỏ nhất hiện tại.
+		\item Với mỗi đỉnh $u$ được chọn, duyệt tất cả các \textbf{cạnh} kề $(u,v,w)$ (bao gồm các cạnh song song nếu có) và cập nhật nếu tìm thấy một đường đi tốt hơn:
+		\[
+		\text{Nếu } \text{dist}[v] > \text{dist}[u] + w \text{ thì cập nhật: } \text{dist}[v] = \text{dist}[u] + w
+		\]
+		\item Lặp lại bước trên cho đến khi hàng đợi rỗng.
+	\end{enumerate}
+	
+	\subsection*{Bài toán 16: Let $G = (V,E)$ be a general graph. Implement the Dijkstra's algorithm to find the shortest path problem on $G$.}
+	
+	Ta có ý tưởng như sau:
+	
+	\begin{itemize}
+		\item Gán giá trị khoảng cách ban đầu từ đỉnh xuất phát $s$ đến tất cả các đỉnh là vô cùng ($\infty$), riêng $d(s) = 0$.
+		
+		\item Sử dụng một hàng đợi ưu tiên (priority queue) hoặc một tập đỉnh chưa xét để lần lượt chọn đỉnh $u$ có khoảng cách tạm thời nhỏ nhất.
+		
+		\item Với mỗi đỉnh $u$ được chọn:
+		\begin{itemize}
+			\item Duyệt qua tất cả các cạnh $(u, v) \in E$ xuất phát từ $u$ (kể cả cạnh song song, nếu có).
+			\item Nếu đường đi mới từ $s$ đến $v$ thông qua $u$ ngắn hơn giá trị hiện tại của $d(v)$, thì cập nhật lại $d(v)$.
+		\end{itemize}
+		
+		\item Lặp lại cho đến khi không còn đỉnh nào trong hàng đợi/tập đỉnh chưa xét.
 	\end{itemize}
 \end{document}
