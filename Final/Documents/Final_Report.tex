@@ -184,7 +184,52 @@
 	
 	\subsection*{Viết chương trình {\sf C{\tt/}C++, Python} chuyển đổi giữa 4 dạng biểu diễn: adjacency matrix, adjacency list, extended adjacency list, adjacency map cho $3$ đồ thị: đơn đồ thị, đa đồ thị, đồ thị tổng quát; \& 3 dạng biểu diễn: array of parents, first-child next-sibling, graph-based representation of trees của cây.}
 	
-	Sẽ có $3A_4^3 + A_3^2 = 36 + 6 = 42$ converter programs.
+	\subsubsection*{1. Biểu diễn đồ thị}
+	
+	Một đồ thị có thể được biểu diễn theo nhiều cách, mỗi cách phục vụ một mục đích tính toán hoặc lưu trữ khác nhau. Các dạng biểu diễn phổ biến bao gồm:
+	
+	\begin{itemize}
+		\item \textbf{Ma trận kề (Adjacency Matrix)}: Là một ma trận vuông kích thước $n \times n$, trong đó phần tử $A[i][j]$ chứa số cạnh hoặc trọng số từ đỉnh $i$ đến $j$.
+		\item \textbf{Danh sách kề (Adjacency List)}: Là một danh sách trong đó mỗi phần tử tương ứng với một đỉnh, lưu các đỉnh kề và trọng số cạnh.
+		\item \textbf{Danh sách kề mở rộng (Extended Adjacency List)}: Mở rộng từ danh sách kề, mỗi cạnh lưu thêm thông tin như số lượng cạnh (cho đa đồ thị), nhãn, hoặc trọng số.
+		\item \textbf{Bản đồ kề (Adjacency Map)}: Mỗi đỉnh ánh xạ tới một \texttt{map} hoặc \texttt{dict} lưu các đỉnh kề cùng trọng số tương ứng. Cấu trúc này rất thuận tiện cho việc truy vấn cạnh hoặc trọng số nhanh.
+	\end{itemize}
+
+	Về ý tưởng chuyển đổi:
+	
+	\begin{itemize}
+		\item \textbf{Từ Ma trận kề $\rightarrow$ Danh sách kề}:
+		Duyệt toàn bộ ma trận, nếu $A[i][j] \neq 0$ thì thêm một cạnh từ $i$ đến $j$ vào danh sách.
+		\item \textbf{Từ Danh sách kề $\rightarrow$ Ma trận kề}:
+		Tạo một ma trận $n \times n$ toàn 0. Với mỗi đỉnh $i$ và danh sách cạnh $(j, w)$, gán $A[i][j] = w$.
+		\item \textbf{Từ Danh sách kề $\rightarrow$ Bản đồ kề}:
+		Với mỗi đỉnh $i$, ánh xạ mỗi đỉnh kề $j$ vào trọng số $w$ trong một bản đồ.
+	\end{itemize}
+	
+	\subsubsection*{2. Biểu diễn cây}
+	
+	Một cây có thể được biểu diễn theo nhiều dạng:
+	
+	\begin{itemize}
+		\item \textbf{Mảng cha (Array of Parents)}: Mỗi nút $i$ có một giá trị $parent[i]$, là chỉ số nút cha. Nếu $parent[i] = -1$ thì $i$ là gốc.
+		\item \textbf{First-Child Next-Sibling (FCNS)}: Mỗi nút có 2 con trỏ: \texttt{firstChild} và \texttt{nextSibling}, cho phép biểu diễn cây dạng nhị phân hóa.
+		\item \textbf{Đồ thị biểu diễn cây}: Xem cây là một đồ thị không chu trình có hướng từ cha đến con.
+	\end{itemize}
+	
+	Về việc chuyển đổi từ mảng cha sang FCNS:
+	
+	\begin{enumerate}
+		\item Khởi tạo danh sách nút FCNS.
+		\item Duyệt từng nút $i$:
+		\begin{itemize}
+			\item Nếu $parent[i] = -1$ thì nút $i$ là gốc.
+			\item Ngược lại:
+			\begin{itemize}
+				\item Nếu cha chưa có con, gán \texttt{firstChild = i}.
+				\item Nếu đã có con, tìm con cuối cùng và gán \texttt{nextSibling = i}.
+			\end{itemize}
+		\end{itemize}
+	\end{enumerate}
 
 	\subsection*{Làm Problems 1.1--1.6 \& Exercises 1.1--1.10.}
 	
